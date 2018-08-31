@@ -7,15 +7,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "github-sub-2:adojem/php-e-commerce.git"
-  },
   "keywords": [],
   "author": "Terry Osayawe",
   "license": "ISC",
   "dependencies": {
     "gulp": "^3.9.1",
     "laravel-elixir": "^6.0.0-18"
+  },
+  "devDependencies": {
+    "@prettier/plugin-php": "^0.6.0",
+    "prettier": "^1.14.2"
   }
 }

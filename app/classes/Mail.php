@@ -1,6 +1,6 @@
 <?php
    namespace App\Classes;
-   use PHPMailer;
+   use PHPMailer\PHPMailer\PHPMailer;
 
    class Mail {
       protected $mail;
@@ -19,9 +19,9 @@
          $this->mail->Host = getenv('SMTP_HOST');
          $this->mail->Port = getenv('SMTP_PORT');
 
-         $environment = getenv('APP_EVN');
+         $environment = getenv('APP_ENV');
          if ($environment == 'local') {
-            $this->mail->SMTDebug = 2;
+            $this->mail->SMTPDebug = 2;
          }
 
          // auth info
@@ -38,7 +38,8 @@
 
       public function send($data) {
          $this->mail->addAddress($data['to'], $data['name']);
-         $this->mail->subject = $data['subject'];
-         $this->mail->Body = '';
+         $this->mail->Subject = $data['subject'];
+         $this->mail->Body = make($data['view'], array('data' => $data['body']));
+         return $this->mail->send();
       }
    }

@@ -13,9 +13,7 @@ class RouteDispatcher {
    public function __construct(AltoRouter $router) {
       $this->match = $router->match();
 
-      $match = $router->match();
-
-      if ($this->$match) {
+      if ($this->match) {
          list($controller, $method) = explode('@', $this->match['target']);
          $this->controller = $controller;
          $this->method = $method;

@@ -9,3 +9,16 @@ function view($path, array $data = []) {
 
    echo $blade->view()->make($path, $data)->render();
 }
+
+function make($filename, $data) {
+   extract($data);
+
+   ob_start();
+   // include template
+   include(__DIR__ . '/../../resources/views/emails/' . $filename . '.php');
+   // get content of the file
+   $content = ob_get_contents();
+   ob_end_clean();
+
+   return $content;
+}
