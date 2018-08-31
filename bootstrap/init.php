@@ -7,6 +7,9 @@
    // Instantiate database class
    new \App\Classes\Database();
 
+   // set custom error handler
+   set_error_handler([new \App\Classes\ErrorHandler(), 'handleErrors']);
+
    require_once __DIR__ . '/../app/routing/routes.php';
    
    new \App\RouteDispatcher($router);
