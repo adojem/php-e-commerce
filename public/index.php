@@ -3,8 +3,8 @@
 
    $app_name = getenv('APP_NAME');
 
-   use illuminate\Database\Capsule\Manager as Capsule;
+//    use illuminate\Database\Capsule\Manager as Capsule;
   
-  $user = Capsule::table('categories')->get();
+//   $user = Capsule::table('categories')->get();
 
-  var_dump($user->toArray());
+//   var_dump($user->toArray());

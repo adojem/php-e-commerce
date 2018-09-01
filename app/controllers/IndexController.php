@@ -8,7 +8,7 @@ class IndexController extends BaseController {
    public function show() {
       echo "Inside Homepage from controller class";
       $mail = new Mail();
-      $datas = [
+      $data = [
          'to' => getenv('ADMIN_EMAIL'),
          'subject' => 'Welcome to Acme Store',
          'view' => 'welcome',
