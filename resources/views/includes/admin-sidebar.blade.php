@@ -1,8 +1,8 @@
-<div class="off-canvas position-left reveal-for-large" id="offCanvas" data-off-canvas>
+<div class="off-canvas position-left reveal-for-large nav" id="offCanvas" data-off-canvas>
 
    <h3>Welcome Admin</h3>
 
-   <div>
+   <div class="image-holder text-center">
       <img src="./images/terry.jpg" alt="Admin">
       <p>Terry O.</p>
    </div>
