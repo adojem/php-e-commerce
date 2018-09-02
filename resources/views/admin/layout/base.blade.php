@@ -6,21 +6,11 @@
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
    <title>Admin Panel - @yield('title')</title>
    <link rel="stylesheet" href="./css/all.css">
+   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
 </head>
 <body>
-   <div class="off-canvas position-left reveal-for-large" id="offCanvas" data-off-canvas>
 
-      <!-- Side bar -->
-      <ul class="vertical menu">
-      <li><a href="#">Foundation</a></li>
-      <li><a href="#">Dot</a></li>
-      <li><a href="#">ZURB</a></li>
-      <li><a href="#">Com</a></li>
-      <li><a href="#">Slash</a></li>
-      <li><a href="#">Sites</a></li>
-      </ul>
-
-   </div>
+   @include('includes.admin-sidebar')
 
    <div class="off-canvas-content" data-off-canvas-content>
 
