@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Admin;
 
+use App\Classes\Request;
 use App\Classes\Session;
 use App\Controllers\BaseController;
 
@@ -19,5 +20,10 @@ class DashboardController extends BaseController {
       }
 
       return view('admin/dashboard', ['admin' => $msg]);
+   }
+
+   public function get() {
+      $request = Request::get('post');
+      var_dump($request);
    }
 }
