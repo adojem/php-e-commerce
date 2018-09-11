@@ -6,7 +6,9 @@
       <div class="row expanded">
          <h2>Product Categories</h2>
       </div>
-
+      @if($message)
+         <p>{{$message}}</p>
+      @endif
       <div class="row expanded">
 
          <div class="small-12 medium-6 columns">
@@ -21,7 +23,7 @@
          </div>
 
          <div class="small-12 medium-5 end columns">
-            <form action="/admin/product/categories" method="post">
+            <form action="" method="post">
             <div class="input-group">
                <input type="text" class="input-group-field" placeholder="Category name" name="name">
                <div class="input-group-button">

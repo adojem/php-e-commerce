@@ -22,3 +22,11 @@ function make($filename, $data) {
 
    return $content;
 }
+
+function slug($value) {
+   $value = preg_replace('![^'.preg_quote('_').'\pL\pN\s]+!u', '', mb_strtoLower($value));
+
+   $value = preg_replace('!['.preg_quote('-').'\s]+!u', '-', $value);
+
+   return trim($value, '-');
+}
