@@ -26,12 +26,11 @@ class ValidateRequest {
    public function abide(array $dataAndValues, array $policies) {
       foreach ($dataAndValues as $column => $value) {
          if (in_array($column, array_keys($policies))) {
-            // do validation
             self::doValidation(
                [
                   'column' => $column,
                   'value' => $value,
-                  'policies' => $polcies[$column]
+                  'policies' => $policies[$column]
                ]
             );
          }
@@ -67,7 +66,7 @@ class ValidateRequest {
     * @return bool true | false
     */
     
-   protected function unique($column, $value, $policy) {
+   protected static function unique($column, $value, $policy) {
       if ($value != null && !empty(trim($value))) {
          return !Capsule::table($policy)->where($column, '=', $value)->exists();
       }
