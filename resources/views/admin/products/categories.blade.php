@@ -40,9 +40,9 @@
                   <tbody>
                      @foreach($categories as $category)
                         <tr>
-                           <td>{{$category->name}}</td>
-                           <td>{{$category->slug}}</td>
-                           <td>{{$category->created_at->toFormattedDateString()}}</td>
+                           <td>{{$category['name']}}</td>
+                           <td>{{$category['slug']}}</td>
+                           <td>{{$category['added']}}</td>
                            <td>
                               <a href="#"><i class="fa fa-edit"></i></a>
                               <a href="#"><i class="fa fa-times"></i></a>
@@ -51,6 +51,8 @@
                      @endforeach
                   </tbody>
                </table>
+
+               {!! $links !!}
             @else
                <h3>Your have not created any category</h3>
             @endif
