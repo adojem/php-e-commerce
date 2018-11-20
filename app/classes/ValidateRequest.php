@@ -143,7 +143,7 @@ class ValidateRequest {
     * @return boolean
     */
    public function hasError() {
-      return count(self::$error) > 0 ? true : flase;
+      return count(self::$error) > 0 ? true : false;
    }
 
    public function getErrorMessages() {

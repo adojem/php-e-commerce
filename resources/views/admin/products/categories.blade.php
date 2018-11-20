@@ -2,13 +2,13 @@
 @section('title', 'Product Categories')
 
 @section('content')
-   <div class="category">
-      <div class="row expanded">
+   <div class="category grid-container">
+      <div>
          <h2>Product Categories</h2>
       </div>
-      @if($message)
-         <p>{{$message}}</p>
-      @endif
+
+      @include('includes.message')
+
       <div class="grid-x grid-padding-x">
 
          <div class="small-12 medium-6 cell">
@@ -22,7 +22,7 @@
             </form>
          </div>
 
-         <div class="small-12 medium-5 cell">
+         <div class="small-12 medium-6 cell">
             <form action="" method="post">
             <div class="input-group">
                <input type="text" class="input-group-field" placeholder="Category name" name="name">
@@ -34,7 +34,7 @@
             </form>
          </div>
 
-         <div class="small-12 medium-11 cell">
+         <div class="small-12 medium-12 cell">
             @if (count($categories))
                <table class="over">
                   <tbody>
