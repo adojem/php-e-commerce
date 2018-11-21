@@ -47,14 +47,16 @@
                            <td>
                               <a data-open="item-{{$category['id']}}"><i class="fa fa-edit"></i></a>
                               <a href="#"><i class="fa fa-times"></i></a>
+
+                              <!-- Edit Category Modal -->
                               <div class="reveal" id="item-{{$category['id']}}" data-reveal data-close-on-click="false" data-close-on-esc="false">
-                                 <h1>Edit Ctategory</h1>
+                                 <div class="notification"></div>
+                                 <h2>Edit Ctategory</h2>
                                  <form>
                                     <div class="input-group">
-                                       <input type="text" class="input-group-field" name="name" value="{{$category['name']}}">
-                                       <input type="hidden" name="token" value="{{\App\Classes\CSRFToken::_token()}}">
+                                       <input type="text" id="item-name-{{$category['id']}}" class="input-group-field" name="name" value="{{$category['name']}}">
                                        <div>
-                                          <input type="submit" value="Update" class="button update-category" id="{{$category['id']}}">
+                                          <input type="submit" value="Update" class="button update-category" id="{{$category['id']}}" data-token="{{\App\Classes\CSRFToken::_token()}}">
                                        </div>
                                     </div>
                                  </form>

@@ -7052,6 +7052,10 @@ a.thumbnail image {
   }
 }
 
+.notification {
+  display: none;
+}
+
 .nav {
   background-color: #2a3f54;
 }
