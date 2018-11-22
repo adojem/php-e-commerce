@@ -49,8 +49,8 @@
                               <a href="#"><i class="fa fa-times"></i></a>
 
                               <!-- Edit Category Modal -->
-                              <div class="reveal" id="item-{{$category['id']}}" data-reveal data-close-on-click="false" data-close-on-esc="false">
-                                 <div class="notification"></div>
+                              <div class="reveal" id="item-{{$category['id']}}" data-reveal data-close-on-click="false" data-close-on-esc="false" data-animation-in="scale-in-up">
+                                 <div class="notification  callout primary"></div>
                                  <h2>Edit Ctategory</h2>
                                  <form>
                                     <div class="input-group">
@@ -60,9 +60,9 @@
                                        </div>
                                     </div>
                                  </form>
-                                 <button class="close-button" data-close aria-label="Close modal" type="button">
+                                 <a href="<?php echo getenv('URL_ROOT'); ?>/admin/product/categories" class="close-button" data-close aria-label="Close modal" type="button">
                                     <span aria-hidden="true">&times;</span>
-                                 </button>
+                                 </a href="/admin/product/categories">
                               </div>
                            </td>
                         </tr>

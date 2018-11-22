@@ -81,7 +81,7 @@ class ProductCategoryController {
       if (Request::has('post')) {
          $request = Request::get('post');
 
-         if (CSRFToken::verifyCSRFToken($request->token)) {
+         if (CSRFToken::verifyCSRFToken($request->token, false)) {
             $rules = [
                'name' => [
                   'required' => true,
