@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import 'foundation-sites';
-import update from './admin/update';
+import admin from './admin';
 
 $(document).foundation();
 $(document).ready(() => {
@@ -9,7 +9,8 @@ $(document).ready(() => {
          break;
 
       case 'adminCategories':
-         update();
+         admin.update();
+         admin.remove();
          break;
 
       default:

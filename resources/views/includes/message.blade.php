@@ -16,10 +16,13 @@
       </div>
    @endif
 
-   @if(isset($success))
+   @if(isset($success) || \App\Classes\Session::has('success'))
       <div class="callout success" data-closable>
-         {{ $success }}
-
+         @if(isset($success))
+            {{ $success }}
+         @elseif(\App\Classes\Session::has('success'))
+            {{ \App\Classes\Session::flash('success') }}
+         @endif
          <button class="close-button" aria-label="Dismiss Message" type="button" data-close>
             <span arial-hidden="true">&times;</span>
          </button>

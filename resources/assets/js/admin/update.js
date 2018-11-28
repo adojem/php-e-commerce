@@ -43,7 +43,7 @@ const update = () => {
                .delay(4000)
                .slideUp(300)
                .html(ul);
-         }
+         },
       });
    });
 };

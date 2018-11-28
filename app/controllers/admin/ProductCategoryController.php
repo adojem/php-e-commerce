@@ -2,7 +2,9 @@
 namespace App\Controllers\Admin;
 
 use App\Classes\CSRFToken;
+use App\Classes\Redirect;
 use App\Classes\Request;
+use App\Classes\Session;
 use App\Classes\ValidateRequest;
 use App\Models\Category;
 
@@ -17,7 +19,7 @@ class ProductCategoryController {
       $total = Category::all()->count();
       $object = new Category;
 
-      list($this->categories, $this->links) = paginate(3, $total, $this->table_name, $object);
+      list($this->categories, $this->links) = paginate(6, $total, $this->table_name, $object);
    }
 
    public function show()
@@ -36,7 +38,7 @@ class ProductCategoryController {
             $rules = [
                'name' => [
                   'required' => true,
-                  'minLength' => 3,
+                  'minLength' => 6,
                   'string' => true,
                   'unique' => 'categories',
                ]
@@ -102,9 +104,29 @@ class ProductCategoryController {
             }
 
             Category::where('id', $id)->update(['name' => $request->name]);
-            echo \json_encode(['success' => 'Record Update Successfully']);
+            echo \json_encode([
+               'success' => 'Record Update Successfully',
+               'id' => $id
+            ]);
             exit;
             
+         }
+         throw new \Exception('Token mismtach');
+      }
+
+      return null;
+   }
+
+   public function delete($id)
+   {
+      if (Request::has('post')) {
+         $request = Request::get('post');
+
+         if (CSRFToken::verifyCSRFToken($request->token)) {
+            Category::destroy($id);
+            Session::add('success', 'Category Deleted');
+            Redirect::to(getenv('URL_ROOT') . '/admin/product/categories');
+            exit;
          }
          throw new \Exception('Token mismtach');
       }
