@@ -11,6 +11,7 @@ $(document).ready(() => {
       case 'adminCategories':
          admin.update();
          admin.remove();
+         admin.create();
          break;
 
       default:
