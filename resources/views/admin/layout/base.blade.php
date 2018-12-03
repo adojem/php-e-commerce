@@ -18,7 +18,7 @@
       <div class="title-bar">
          <div class="title-bar-left">
             <button class="menu-icon hide-for-large" type="button" data-open="offCanvas"></button>
-            <span class="title-bar-title">{{ getenv('APP_NAME') }}</span>
+            <h1 class="title-bar-title">{{ getenv('APP_NAME') }}</h1>
          </div>
          <div class="title-bar-right">
             <button class="menu-icon" type="button" data-open="offCanvasRight"></button>

@@ -1,8 +1,22 @@
 h2 {
    margin-top: 1.5rem;
-   margin-bottom: 1rem;
+   margin-bottom: 0;
    font-size: 1.5rem;
    font-weight: 500;
+}
+
+table {
+   border-collapse: collapse;
+
+   th, tr, td {
+      font-size: 0.8rem;
+      padding: 0.3rem;
+      border: 1px solid #c0c0c0;
+   }
+}
+
+hr {
+   margin: 0 0 1rem 0;
 }
 
 .reveal {
