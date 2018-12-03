@@ -50,3 +50,18 @@ $router->map(
    'App\Controllers\Admin\SubCategoryController@delete',
    'delete_subcategory'
 );
+
+// Products
+$router->map(
+   'GET',
+   '/admin/product/create',
+   'App\Controllers\Admin\ProductController@showCreateProductForm',
+   'create_product_form'
+);
+
+$router->map(
+   'POST',
+   '/admin/product/create',
+   'App\Controllers\Admin\ProductController@store',
+   'create_product'
+);
