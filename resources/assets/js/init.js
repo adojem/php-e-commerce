@@ -8,6 +8,10 @@ $(document).ready(() => {
       case 'home':
          break;
 
+      case 'adminProduct':
+         admin.changeEvent();
+         break;
+
       case 'adminCategories':
          admin.update();
          admin.remove();
