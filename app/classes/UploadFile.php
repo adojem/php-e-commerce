@@ -56,7 +56,8 @@ class UploadFile {
     * @param $file
     * @param bool
     */
-   public static function inImage($file) {
+   public static function isImage($file)
+   {
       $fileobj = new static;
       $ext = $fileobj->fileExtension($file);
       $validExt = array('jpg', 'jpeg', 'png', 'gif');
