@@ -11,7 +11,10 @@
 
       @include('includes.message')
 
-      <form method="post" action="/admin/product/create">
+      <form
+         method="post"
+         action="{{getenv('URL_ROOT')}}/admin/product/create"
+         enctype="multipart/form-data">
          <div class="grid-x grid-padding-x">
             <div class="small-12 medium-6 cell">
                <label for="">
@@ -77,9 +80,7 @@
                   <span for="" class="input-group-label">
                      Product Image:
                   </span>
-                  <input
-                        type="file" class="input-group-field" name="productImage"
-                  >
+                  <input type="file" class="input-group-field" name="productImage">
                </div>
             </div>
 
@@ -89,22 +90,17 @@
             <div class="small-12 medium-12 cell">
                <label>
                   Description: 
-                  <textarea name="description" placeholder="Description">
-                     {{ \App\Classes\Request::old('post', 'description') }}
-                  </textarea>
+                  <textarea name="description" placeholder="Description">{{ \App\Classes\Request::old('post', 'description') }}</textarea>
                </label>
                <input
                   type="hidden"
                   name="token"
                   value="{{ \App\Classes\CSRFToken::_token() }}">
                <button class="button alert" type="reset">Reset</button>
-               <button
-                  class="button success float-right"
+               <input
                   type="submit"
-                  value="Save Product"
-               >
-                  Reset
-               </button>
+                  class="button succeess float-right"
+                  value="Save Product">
             </div>
          </div>
 

@@ -28,7 +28,7 @@ class UploadFile {
       }
       $name = strtoLower(str_replace(['-', ' '], '-', $name));
       $hash = md5(microtime());
-      $ext = $this->fileExtention($file);
+      $ext = $this->fileExtension($file);
       $this->filename = "{$name}-{$hash}.{$ext}";
    }
 
@@ -84,9 +84,10 @@ class UploadFile {
     * @param $new_filename
     * @return null | static
     */
-   public static function move($temp_path, $folder, $file, $new_filename) {
+   public static function move($temp_path, $folder, $file, $new_filename = '')
+   {
       $fileObj = new static;
-      $ds = DIRECTORY_SEPARATOR;
+      $ds      = DIRECTORY_SEPARATOR;
 
       $fileObj->setName($file, $new_filename);
       $file_name = $fileObj->getName();

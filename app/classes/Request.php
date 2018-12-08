@@ -38,14 +38,15 @@ class Request {
     */
    public static function old($key, $value) {
       $objet = new static;
-      $data = $objet->all();
+      $data  = $objet->all();
+
       return isset($data->$key->$value) ? $data->$key->$value : '';
    }
 
    /** refresh request */
    public static function refresh() {
-      $_POST = [];
-      $_GET = [];
+      $_POST  = [];
+      $_GET   = [];
       $_FILES = [];
    }
 }

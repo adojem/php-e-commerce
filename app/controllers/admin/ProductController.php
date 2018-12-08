@@ -8,6 +8,7 @@ use App\Classes\Session;
 use App\Classes\ValidateRequest;
 use App\Classes\UploadFile;
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\SubCategory;
 use App\Controllers\BaseController;
 
@@ -43,14 +44,14 @@ class ProductController extends BaseController {
                   'required'  => true,
                   'minLength' => 3,
                   'maxLength' => 70,
-                  'string'    => true,
+                  'mixed'    => true,
                   'unique'    => $this->table_name,
                ],
-               'price' => ['required' => true],
-               'quantity' => ['requirred' => true],
-               'category' => ['required' => true],
-               'subcategory' => ['required' => true],
-               'description' => [
+               'price'        => ['required'  => true],
+               'quantity'     => ['required'  => true],
+               'category'     => ['required'  => true],
+               'subcategory'  => ['required'  => true],
+               'description'  => [
                   'required'  => true,
                   'mixed'     => true,
                   'minLength' => 4,
@@ -62,9 +63,9 @@ class ProductController extends BaseController {
             $validate->abide($_POST, $rules);
 
             $file = Request::get('file');
-            $filename = $file->productImage->name;
+            isset($file->productImage->name) ? $filename = $file->productImage->name : $filename = '';
 
-            if (empty($file->productImage->name)) {
+            if (empty($filename)) {
                $file_error['productImage'] = ['The product image is required'];
             }
             else if (!UploadFile::isImage($filename)) {
@@ -75,31 +76,38 @@ class ProductController extends BaseController {
                $response = $validate->getErrorMessages();
                count($file_error) ? $errors = array_merge($response, $file_error) : $errors = $response;
 
-               return view('admin/products/categories', [
+               return view('admin/products/create', [
                   'categories' => $this->categories,
                   'errors'     => $errors
                ]);
             }
+
+            $ds         = DIRECTORY_SEPARATOR;
+            $temp_file  = $file->productImage->tmp_name;
+            $image_path = UploadFile::move($temp_file, "images{$ds}uploads{$ds}products", $filename)->path();
             
             // process from data
-            Category::create([
-               'name' => $request->name,
-               'slug' => slug($request->name)
+            Product::create([
+               'name'            => $request->name,
+               'description'     => $request->description,
+               'price'           => $request->price,
+               'category_id'     => $request->category,
+               'sub_category_id' => $request->subcategory,
+               'image_path'      => $image_path,
+               'quantity'        => $request->quantity,
             ]);
+
+            Request::refresh();
             
-            $total = Category::all()->count();
-            $subtotal = SubCategory::all()->count();
-            list($this->categories, $this->links) = paginate(3, $total, $this->table_name, new Category);
-            list($this->subcategories, $this->subcategories_links) = paginate(3, $subtotal, 'sub' . $this->table_name, new SubCategory);
-            
-            return view('admin/products/categories', [
-               'categories' => $this->categories,
-               'subcategories' => $this->subcategories,
-               'links' => $this->links,
-               'subcategories_links' => $this->subcategories_links,
-               'success' => 'Category Created'
-            ]);
+            return view(
+               'admin/products/create',
+               [
+                  'categories' => $this->categories,
+                  'success'    => 'Record Created',
+               ]
+            );
          }
+
          throw new \Exception('Token mismtach');
       }
 

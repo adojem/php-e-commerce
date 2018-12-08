@@ -20,13 +20,13 @@ class SubCategoryController extends BaseController {
          if (CSRFToken::verifyCSRFToken($request->token, false)) {
             $rules = [
                'name' => [
-                  'required' => true,
+                  'required'  => true,
                   'minLength' => 3,
-                  'mixed' => true,
+                  'mixed'     => true,
                ],
                'category_id' => ['required' => true]
             ];
-
+            var_dump($_POST);
             $validate = new ValidateRequest;
             $validate->abide($_POST, $rules);
 
@@ -52,9 +52,9 @@ class SubCategoryController extends BaseController {
             
             // process from data
             SubCategory::create([
-               'name' => $request->name,
+               'name'        => $request->name,
                'category_id' => $request->category_id,
-               'slug' => slug($request->name)
+               'slug'        => slug($request->name)
             ]);
             
             echo json_encode(['success' => 'Subcategory create successfully']);

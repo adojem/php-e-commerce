@@ -45,10 +45,10 @@ class ProductCategoryController extends BaseController {
          if (CSRFToken::verifyCSRFToken($request->token)) {
             $rules = [
                'name' => [
-                  'required' => true,
-                  'minLength' => 6,
-                  'string' => true,
-                  'unique' => 'categories',
+                  'required'  => true,
+                  'minLength' => 3,
+                  'mixed'     => true,
+                  'unique'    => 'categories',
                ]
             ];
 
@@ -76,16 +76,17 @@ class ProductCategoryController extends BaseController {
             $total = Category::all()->count();
             $subtotal = SubCategory::all()->count();
             list($this->categories, $this->links) = paginate(3, $total, $this->table_name, new Category);
-            list($this->subcategories, $this->subcategories_links) = paginate(3, $subtotal, 'sub' . $this->table_name, new SubCategory);
+            list($this->subcategories, $this->subcategories_links) = paginate(3, $subtotal, 'sub_' . $this->table_name, new SubCategory);
             
             return view('admin/products/categories', [
-               'categories' => $this->categories,
-               'subcategories' => $this->subcategories,
-               'links' => $this->links,
+               'categories'          => $this->categories,
+               'subcategories'       => $this->subcategories,
+               'links'               => $this->links,
                'subcategories_links' => $this->subcategories_links,
-               'success' => 'Category Created'
+               'success'             => 'Category Created'
             ]);
          }
+
          throw new \Exception('Token mismtach');
       }
 

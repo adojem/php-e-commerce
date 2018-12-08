@@ -8,14 +8,14 @@ class ValidateRequest {
 
    private static $error = [];
    private static $error_messages = [
-      'string' => 'The :attribute field cannot contain numbers',
-      'required' => 'The :attribute field is required',
+      'string'    => 'The :attribute field cannot contain numbers',
+      'required'  => 'The :attribute field is required',
       'minLength' => 'The :attribute field must be a minimm of :policy characters',
       'maxLength' => 'The :attribute field must be a minimm of :policy characters',
-      'mixed' => 'The :attribute field can contain letters, numbers, dash and space only',
-      'number' => 'The :attribute field cannot  contain letters e.g. 20.0, 20',
-      'email' => 'Email address is not valid',
-      'unique' => 'That :attribute is already taken, please try another one',
+      'mixed'     => 'The :attribute field can contain letters, numbers, dash and space only',
+      'number'    => 'The :attribute field cannot  contain letters e.g. 20.0, 20',
+      'email'     => 'Email address is not valid',
+      'unique'    => 'That :attribute is already taken, please try another one',
    ];
 
    /**
@@ -28,8 +28,8 @@ class ValidateRequest {
          if (in_array($column, array_keys($policies))) {
             self::doValidation(
                [
-                  'column' => $column,
-                  'value' => $value,
+                  'column'   => $column,
+                  'value'    => $value,
                   'policies' => $policies[$column]
                ]
             );
@@ -46,7 +46,10 @@ class ValidateRequest {
    private static function doValidation(array $data) {
       $column = $data['column'];
       foreach ($data['policies'] as $rule => $policy) {
-         $valid = call_user_func_array([self::class, $rule], [$column, $data['value'], $policy]);
+         $valid = call_user_func_array(
+            [self::class, $rule],
+            [$column, $data['value'], $policy]
+         );
          if (!$valid) {
             self::setError(
                str_replace(
