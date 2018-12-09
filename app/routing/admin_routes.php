@@ -72,3 +72,10 @@ $router->map(
    'App\Controllers\Admin\ProductController@store',
    'create_product'
 );
+
+$router->map(
+   'GET',
+   '/admin/products',
+   'App\Controllers\Admin\ProductController@show',
+   'show_products'
+);
