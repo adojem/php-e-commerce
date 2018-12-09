@@ -14,6 +14,16 @@ class Category extends Model {
    protected $fillable = ['name', 'slug'];
    protected $dates = ['deleted_at'];
 
+   public function products()
+   {
+      return $this->hasMany(Product::class);
+   }
+
+   public function subCategories()
+   {
+      return $this->hasMany(SubCategory::class);
+   }
+
    public function transform($data) {
       $categories = [];
       foreach ($data as $item) {

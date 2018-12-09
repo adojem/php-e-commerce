@@ -10,9 +10,19 @@ class SubCategory extends Model {
    
    use SoftDeletes;
 
-   public $timestamps = true;
+   public $timestamps  = true;
    protected $fillable = ['name', 'slug', 'category_id'];
-   protected $dates = ['deleted_at'];
+   protected $dates    = ['deleted_at'];
+
+   public function category()
+   {
+      return $this->belongsTo(Category::calss);
+   }
+
+   public function product()
+   {
+      return $this->hasMany(Product::class);
+   }
 
    public function transform($data) {
       $subcategories = [];
