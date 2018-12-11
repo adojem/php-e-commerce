@@ -79,3 +79,19 @@ $router->map(
    'App\Controllers\Admin\ProductController@show',
    'show_products'
 );
+
+// show edit product form
+$router->map(
+   'GET',
+   '/admin/product/[i:id]/edit',
+   'App\Controllers\Admin\ProductController@showEditProductForm',
+   'edit_product_form'
+);
+
+// edit product
+$router->map(
+   'POST',
+   '/admin/product/edit',
+   'App\Controllers\Admin\ProductController@edit',
+   'edit_product'
+);

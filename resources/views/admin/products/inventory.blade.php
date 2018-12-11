@@ -25,6 +25,7 @@
                   <thead>
                      <tr>
                         <th>Image</th>
+                        <th>Name</th>
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>Category</th>
@@ -56,7 +57,7 @@
                                  tabindex="1"
                                  title="Edit Product">
                                  <a
-                                    href="/admin/product/{{$product['id']}}/edit"
+                                    href="{{getenv('URL_ROOT')}}/admin/product/{{$product['id']}}/edit"
                                     data-open="item-{{$category['id']}}"><i class="fa fa-edit"></i></a>
                               </span>
                            </td>

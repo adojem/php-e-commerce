@@ -31,13 +31,18 @@ class ProductController extends BaseController {
 
    public function show()
    {
-      $product = Product::where('id', 1)->with(['category', 'subCategory'])->first();
-      var_dump($product);
-      exit;
       $products = $this->products;
       $links    = $this->links;
       
       return view('admin/products/inventory', compact('products', 'links'));
+   }
+
+   public function showEditProductForm($id)
+   {
+      $categories = $this->categories;
+      $product = Product::where('id', $id)->with(['category', 'subCategory'])->first();
+      
+      return view('admin/products/edit', \compact('product', 'categories'));
    }
 
    public function showCreateProductForm()
@@ -46,9 +51,11 @@ class ProductController extends BaseController {
       return view('admin/products/create', \compact('categories'));
    }
 
-   public function store() {
+   public function store()
+   {
       if (Request::has('post')) {
          $request = Request::get('post');
+         $file_error = [];
 
          if (CSRFToken::verifyCSRFToken($request->token)) {
             $rules = [
@@ -126,39 +133,75 @@ class ProductController extends BaseController {
       return null;
    }
 
-   public function edit($id)
+   public function edit()
    {
       if (Request::has('post')) {
          $request = Request::get('post');
+         $file_error = [];
 
-         if (CSRFToken::verifyCSRFToken($request->token, false)) {
+         if (CSRFToken::verifyCSRFToken($request->token)) {
             $rules = [
                'name' => [
-                  'required' => true,
+                  'required'  => true,
                   'minLength' => 3,
-                  'string' => true,
-                  'unique' => 'categories',
-               ]
+                  'maxLength' => 70,
+                  'mixed'    => true,
+               ],
+               'price'        => ['required'  => true],
+               'quantity'     => ['required'  => true],
+               'category'     => ['required'  => true],
+               'subcategory'  => ['required'  => true],
+               'description'  => [
+                  'required'  => true,
+                  'mixed'     => true,
+                  'minLength' => 4,
+                  'maxLength' => 500
+               ],
             ];
 
             $validate = new ValidateRequest;
             $validate->abide($_POST, $rules);
 
-            if ($validate->hasError()) {
-               $errors = $validate->getErrorMessages();
-               header('HTTP/1.1 422 Unprocessible Entity', true, 422);
-               echo \json_encode($errors);
-               exit;
+            $file = Request::get('file');
+            isset($file->productImage->name) ? $filename = $file->productImage->name : $filename = '';
+
+            if (isset($file->productImage->name) && !UploadFile::isImage($filename)) {
+               $file_error['productImage'] = ['The image is invalid, please try again.'];
             }
 
-            Category::where('id', $id)->update(['name' => $request->name]);
-            echo \json_encode([
-               'success' => 'Record Update Successfully',
-               'id' => $id
-            ]);
-            exit;
+            if ($validate->hasError()) {
+               $response = $validate->getErrorMessages();
+               count($file_error) ? $errors = array_merge($response, $file_error) : $errors = $response;
+
+               return view('admin/products/create', [
+                  'categories' => $this->categories,
+                  'errors'     => $errors
+               ]);
+            }
+
+            $product = Product::findOrFail($request->product_id);
+            $product->name            = $request->name;
+            $product->description     = $request->description;
+            $product->price           = $request->price;
+            $product->category_id     = $request->category_id;
+            $product->sub_category_id = $request->sub_category_id;
+
+            if ($filename) {
+               $ds         = DIRECTORY_SEPARATOR;
+               $old_image_path = BASE_PATH . "{$ds}public${ds}$product->image_path";
+               $temp_file  = $file->productImage->tmp_name;
+               $image_path = UploadFile::move($temp_file, "images{$ds}uploads{$ds}products", $filename)->path();
+
+               unlink($old_image_path);
+               $product->image_path = $image_path;
+            }
             
+            $product->save();
+            Session::add('success', 'Record Updated');
+            Redirect::to(getenv('URL_ROOT') . '/admin/products');
+            exit;
          }
+
          throw new \Exception('Token mismtach');
       }
 
