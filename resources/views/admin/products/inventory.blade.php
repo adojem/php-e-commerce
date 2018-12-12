@@ -50,7 +50,7 @@
                            <td>{{$product['category_name']}}</td>
                            <td>{{$product['sub_category_name']}}</td>
                            <td>{{$product['added']}}</td>
-                           <td width="70">
+                           <td class="text-center" width="70">
                               <span
                                  data-tooltip
                                  class="top"

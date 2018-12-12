@@ -101,21 +101,29 @@
                   Description: 
                   <textarea name="description" placeholder="Description">{{ $product->description }}</textarea>
                </label>
-               <input
-                  type="hidden"
-                  name="token"
-                  value="{{ \App\Classes\CSRFToken::_token() }}">
-               <input
-                  type="hidden"
-                  name="product_id"
-                  value="{{  $product->id }}">
-               <input
-                  type="submit"
-                  class="button warning float-right"
-                  value="Update Product">
             </div>
          </div>
 
+         <div class="small-12 medium-12 cell">
+            <input
+               type="hidden"
+               name="token"
+               value="{{ \App\Classes\CSRFToken::_token() }}">
+            <input
+               type="hidden"
+               name="product_id"
+               value="{{  $product->id }}">
+            <input
+               type="submit"
+               class="button warning float-right"
+               value="Update Product">
+         </div>
+
+      </form>
+
+      <form method="POST" action="<?php echo getenv('URL_ROOT'); ?>/admin/product/{{$product->id}}/delete" class="delete-item">
+         <input type="hidden" name="token" value="{{\App\Classes\CSRFToken::_token()}}">
+         <button type="submit" class="button alert">Delete Product</button>
       </form>
 
    </div>

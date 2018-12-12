@@ -10,6 +10,7 @@ $(document).ready(() => {
 
       case 'adminProduct':
          admin.changeEvent();
+         admin.remove();
          break;
 
       case 'adminCategories':
