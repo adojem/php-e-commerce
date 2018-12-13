@@ -2,6 +2,8 @@
 
 @section('body')
 
+   @include('includes.nav')
+
    <div class="site_wrapper">
 
       @yield('content')
