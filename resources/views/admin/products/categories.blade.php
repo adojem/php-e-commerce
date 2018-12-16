@@ -61,7 +61,7 @@
                                  <a data-open="item-{{$category['id']}}"><i class="fa fa-edit"></i></a>
                               </span>
                               <span data-tooltip class="top" tabindex="1" title="Delete Category" style="display:inline-block">
-                                 <form method="POST" action="<?php echo getenv('URL_ROOT'); ?>/admin/product/categories/{{$category['id']}}/delete" class="delete-item">
+                                 <form method="POST" action="/admin/product/categories/{{$category['id']}}/delete" class="delete-item">
                                     <input type="hidden" name="token" value="{{\App\Classes\CSRFToken::_token()}}">
                                     <button type="submit"><i class="fa fa-times delete"></i></button>
                                  </form>
@@ -79,7 +79,7 @@
                                        </div>
                                     </div>
                                  </form>
-                                 <a href="<?php echo getenv('URL_ROOT'); ?>/admin/product/categories" class="close-button" data-close aria-label="Close modal" type="button">
+                                 <a href="/admin/product/categories" class="close-button" data-close aria-label="Close modal" type="button">
                                     <span aria-hidden="true">&times;</span>
                                  </a href="/admin/product/categories">
                               </div>
@@ -96,7 +96,7 @@
                                        </div>
                                     </div>
                                  </form>
-                                 <a href="<?php echo getenv('URL_ROOT'); ?>/admin/product/categories" class="close-button" data-close aria-label="Close modal" type="button">
+                                 <a href="/admin/product/categories" class="close-button" data-close aria-label="Close modal" type="button">
                                     <span aria-hidden="true">&times;</span>
                                  </a href="/admin/product/categories">
                               </div>
@@ -145,7 +145,7 @@
                                  <a data-open="item-subcategory-{{$subcategory['id']}}"><i class="fa fa-edit"></i></a>
                               </span>
                               <span data-tooltip class="top" tabindex="1" title="Delete Subcategory" style="display:inline-block">
-                                 <form method="POST" action="<?php echo getenv('URL_ROOT'); ?>/admin/product/subcategory/{{$subcategory['id']}}/delete" class="delete-item">
+                                 <form method="POST" action="/admin/product/subcategory/{{$subcategory['id']}}/delete" class="delete-item">
                                     <input type="hidden" name="token" value="{{\App\Classes\CSRFToken::_token()}}">
                                     <button type="submit"><i class="fa fa-times delete"></i></button>
                                  </form>
@@ -191,7 +191,7 @@
                                        >
                                     </div>
                                  </form>
-                                 <a href="<?php echo getenv('URL_ROOT'); ?>/admin/product/categories" class="close-button" data-close aria-label="Close modal" type="button">
+                                 <a href="/admin/product/categories" class="close-button" data-close aria-label="Close modal" type="button">
                                     <span aria-hidden="true">&times;</span>
                                  </a href="/admin/product/categories">
                               </div>
