@@ -1,0 +1,17 @@
+.home {
+   padding-top: 4.6rem;
+
+   @include breakpoint(small only) {
+      padding-top: 2.9rem;
+   }
+
+   .hero {
+      width: 100%;
+      
+      .hero-slider {
+         img {
+            width: 100%;
+         }
+      }
+   }
+}

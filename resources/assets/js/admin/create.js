@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import URLROOT from '../../../../env';
 
 const create = () => {
    $('.add-subcategory').on('click', function updateCategory(e) {
@@ -11,7 +10,7 @@ const create = () => {
 
       $.ajax({
          type: 'POST',
-         url: `${URLROOT}/admin/product/subcategory/create`,
+         url: '/admin/product/subcategory/create',
          data: { token, name, category_id: categoryId },
          success(data) {
             const response = $.parseJSON(data);

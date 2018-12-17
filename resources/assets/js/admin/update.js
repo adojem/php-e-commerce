@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import URLROOT from '../../../../env';
 
 const update = () => {
    // update Product Category
@@ -12,7 +11,7 @@ const update = () => {
 
       $.ajax({
          type: 'POST',
-         url: `${URLROOT}/admin/product/categories/${id}/edit`,
+         url: `/admin/product/categories/${id}/edit`,
          data: { token, name },
          success(data) {
             const response = $.parseJSON(data);

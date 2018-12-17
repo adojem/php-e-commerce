@@ -17,7 +17,7 @@
     "cross-env": "^5.2.0",
     "foundation-sites": "^6.5.1",
     "jquery": "^3.3.1",
-    "laravel-mix": "^2.1.14",
+    "laravel-mix": "^4.0.8",
     "motion-ui": "^2.0.3",
     "slick-carousel": "^1.8.1",
     "vue": "^2.5.17"

@@ -2,11 +2,13 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 @import "~foundation-sites/assets/foundation";
 @import "~motion-ui/src/motion-ui";
+@import "~slick-carousel/slick/slick";
 
 @import './global';
 @import './admin/nav';
 @import './admin/titlebar';
 @import './pages/nav';
+@import './pages/home';
 
 @include motion-ui-transitions;
 @include motion-ui-animations;

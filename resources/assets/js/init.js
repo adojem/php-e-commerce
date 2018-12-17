@@ -1,11 +1,13 @@
 import $ from 'jquery';
 import 'foundation-sites';
 import admin from './admin';
+import initCarousel from './pages/slider';
 
 $(document).foundation();
 $(document).ready(() => {
    switch ($('body').data('page-id')) {
       case 'home':
+         initCarousel();
          break;
 
       case 'adminProduct':

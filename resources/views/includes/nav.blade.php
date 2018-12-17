@@ -33,7 +33,7 @@
                   @foreach ($categories as $category)
                      <li>
                         <a href="#">{{ $category->name }}</a>
-                        @if ($category->subCategories)
+                        @if (count($category->subCategories) != 0)
                            <ul class="menu sub vertical">
                               @foreach ($category->subCategories as $subCategory)
                                  <li>

@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import URLROOT from '../../../../env';
 
 const changeEvent = () => {
    $('#product-category').on('change', () => {
@@ -13,7 +12,7 @@ const changeEvent = () => {
 
       $.ajax({
          type: 'GET',
-         url: `${URLROOT}/admin/category/${categoryId}/selected`,
+         url: `/admin/category/${categoryId}/selected`,
          data: { category_id: categoryId },
          success(response) {
             const $subcategorySelect = $('#product-subcategory');
