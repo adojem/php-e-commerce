@@ -91,7 +91,7 @@ class ProductController extends BaseController {
                $file_error['productImage'] = ['The image is invalid, please try again.'];
             }
 
-            if ($validate->hasError()) {
+            if ($validate->hasError() || count($file_error)) {
                $response = $validate->getErrorMessages();
                count($file_error) ? $errors = array_merge($response, $file_error) : $errors = $response;
 

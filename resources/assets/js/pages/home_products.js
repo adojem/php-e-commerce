@@ -6,19 +6,19 @@ const homePageProducts = () => {
       el: '#root',
       data: {
          featured: [],
+         products: [],
          loading: false,
       },
       methods: {
          getFeaturedProducts() {
             this.loading = true;
-            axios
-               .get('/featured')
-               .then((response) => {
-                  console.log(response.data);
-                  app.featured = response.data.featured;
+            axios.all([axios.get('/featured'), axios.get('/get-products')]).then(
+               axios.spread((featuredResponse, productsResponse) => {
+                  app.featured = featuredResponse.data.featured;
+                  app.products = productsResponse.data.products;
                   app.loading = false;
-               })
-               .catch(err => console.log(err));
+               }),
+            );
          },
          stringLimit(string, value) {
             if (string.length > value) {

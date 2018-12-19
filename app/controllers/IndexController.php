@@ -18,4 +18,11 @@ class IndexController extends BaseController
       
       echo \json_encode(['featured' => $products]);
    }
+
+   public function getProducts()
+   {
+      $products = Product::where('featured', 0)->skip(0)->take(8)->get();
+
+      echo \json_encode(['products' => $products]);
+   }
 }
