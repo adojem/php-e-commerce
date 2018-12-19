@@ -15,3 +15,52 @@
       }
    }
 }
+
+.display-products {
+   padding: 2rem;
+   text-align: center;
+   
+   @include breakpoint(small only) {
+      padding: 0.7rem;
+   }
+
+   p {
+      color: #000;
+   }
+
+   a {
+      &:focus {
+         outline: none;
+      }
+   }
+
+   .card {
+      padding: 0.9rem;
+
+      .card-section {
+         margin-bottom: 0.7rem;
+
+         img {
+            // width: 200px;
+            // height: 250px;
+            border-radius: 0.5rem;
+         }
+
+         .button {
+            border-radius: 0.2rem;
+            font-size: 0.8rem;
+
+            &.more {
+               color: #00d6b2;
+               background-color: #fff;
+               border: 1px solid #00d6b2;
+
+               &:hover {
+                  color: #fff;
+                  background-color: darken(#00d6b2, 7%);
+               }
+            }
+         }
+      }
+   }
+}

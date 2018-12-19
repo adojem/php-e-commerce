@@ -26,7 +26,7 @@ class SubCategoryController extends BaseController {
                ],
                'category_id' => ['required' => true]
             ];
-            var_dump($_POST);
+            
             $validate = new ValidateRequest;
             $validate->abide($_POST, $rules);
 

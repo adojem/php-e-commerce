@@ -13,7 +13,7 @@
 
       <form
          method="post"
-         action="{{getenv('URL_ROOT')}}/admin/product/edit"
+         action="/admin/product/edit"
          enctype="multipart/form-data">
          <div class="grid-x grid-padding-x">
             <div class="small-12 medium-6 cell">
@@ -44,7 +44,6 @@
                   <select
                      name="category"
                      id="product-category">
-                     {{var_dump($product)}}
                      <option value="{{ $product->category->id }}">
                         {{ $product->attributes->name }}
                      </option>
@@ -121,7 +120,7 @@
 
       </form>
 
-      <form method="POST" action="<?php echo getenv('URL_ROOT'); ?>/admin/product/{{$product->id}}/delete" class="delete-item">
+      <form method="POST" action="/admin/product/{{$product->id}}/delete" class="delete-item">
          <input type="hidden" name="token" value="{{\App\Classes\CSRFToken::_token()}}">
          <button type="submit" class="button alert">Delete Product</button>
       </form>

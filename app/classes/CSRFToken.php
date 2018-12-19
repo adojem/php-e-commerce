@@ -25,8 +25,10 @@ class CSRFToken {
          if ($regenerate) {
             Session::remove('token');
          }
+
          return true;
       }
+      
       return false;
    }
 }

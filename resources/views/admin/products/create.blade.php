@@ -13,7 +13,7 @@
 
       <form
          method="post"
-         action="{{getenv('URL_ROOT')}}/admin/product/create"
+         action="/admin/product/create"
          enctype="multipart/form-data">
          <div class="grid-x grid-padding-x">
             <div class="small-12 medium-6 cell">

@@ -39,7 +39,7 @@
                         <tr>
                            <td>
                               <img
-                                 src="{{getenv('URL_ROOT')}}/{{ $product['image_path']}}"
+                                 src="/{{ $product['image_path']}}"
                                  alt="{{$product['name']}}"
                                  height="40"
                                  width="40">
@@ -57,7 +57,7 @@
                                  tabindex="1"
                                  title="Edit Product">
                                  <a
-                                    href="{{getenv('URL_ROOT')}}/admin/product/{{$product['id']}}/edit"
+                                    href="/admin/product/{{$product['id']}}/edit"
                                     data-open="item-{{$category['id']}}"><i class="fa fa-edit"></i></a>
                               </span>
                            </td>
