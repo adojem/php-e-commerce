@@ -20,4 +20,11 @@ $router->map(
    'get_product'
 );
 
+$router->map(
+   'POST',
+   '/load-more',
+   'App\Controllers\IndexController@loadMoreProducts', 
+   'load_more_product'
+);
+
 require_once __DIR__ . '/admin_routes.php';

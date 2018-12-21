@@ -14,11 +14,11 @@
          </div>
       </section>
 
-      <section class="display-products" id="root">
+      <section class="display-products" data-token="{{ $token }}" id="root">
 
          <div>
 
-            <h2>Featured Products</h2>
+            <h2 v-show="!loading">Featured Products</h2>
             
             <div class="grid-x">
                
@@ -47,7 +47,7 @@
 
          <div class="grid-container">
 
-            <h2>Product Picks</h2>
+            <h2 v-show="!loading">Product Picks</h2>
 
             <div class="grid-x">
                
@@ -72,6 +72,10 @@
 
             </div>
 
+         </div>
+
+         <div v-show="loading">
+            <i class="fas fa-spinner fa-spin" style="position:fixed; top:60%; color:#0a2b1d; font-size:3rem"></i>
          </div>
 
       </section>
