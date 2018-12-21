@@ -3,7 +3,9 @@ $heading-large: 2.5rem;
 $heading-medium: 2rem;
 $heading-small: 1.7rem;
 
-$base-path: '/php/ecommerce/public';
+[v-cloak] .v-cloak--hidden {
+   display: none;
+}
 
 *,
 *::after,
@@ -16,7 +18,7 @@ $base-path: '/php/ecommerce/public';
 body {
    box-sizing: border-box;
    line-height: 1.5;
-   font-family: 'Open Sans', sans-serif;
+   font-family: 'Average', serif;
 }
 
 .site_wrapper {
@@ -26,9 +28,18 @@ body {
 
 h2 {
    margin-top: 1.5rem;
-   margin-bottom: 0;
+   padding: 1rem;
+   font-family: 'Fjalla One', serif;
    font-size: 1.5rem;
    font-weight: 500;
+
+   @include breakpoint(medium only) {
+      font-size: 1.8rem;
+   }
+
+   @include breakpoint(large only) {
+      font-size: 2rem;
+   }
 }
 
 table {
