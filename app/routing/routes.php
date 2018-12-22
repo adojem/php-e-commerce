@@ -1,6 +1,7 @@
 <?php
 $router = new AltoRouter;
 // $router->setBasePath('/php/ecommerce/public');
+
 $router->map(
    'GET',
    '/',
@@ -26,5 +27,21 @@ $router->map(
    'App\Controllers\IndexController@loadMoreProducts', 
    'load_more_product'
 );
+
+// Product
+$router->map(
+   'GET',
+   '/product/[i:id]',
+   'App\Controllers\ProductController@show',
+   'product'
+);
+
+$router->map(
+   'GET',
+   '/product-details/[i:id]',
+   'App\Controllers\ProductController@get',
+   'product-details'
+);
+
 
 require_once __DIR__ . '/admin_routes.php';

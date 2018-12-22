@@ -11,6 +11,10 @@ $(document).ready(() => {
          pages.homePageProducts();
          break;
 
+      case 'product':
+         pages.productDetails();
+         break;
+
       case 'adminProduct':
          admin.changeEvent();
          admin.remove();
