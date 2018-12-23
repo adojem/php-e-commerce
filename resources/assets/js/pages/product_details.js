@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
+import { truncateString, addItemToCart } from './lib';
 
 const productDetails = () => {
    const app = new Vue({
@@ -26,11 +27,11 @@ const productDetails = () => {
             }, 1000);
          },
          stringLimit(string, value) {
-            if (string.length > value) {
-               return `${string.substring(0, value)}...`;
-            }
-
-            return string;
+            return truncateString(string, value);
+         },
+         addToCart(id) {
+            const message = addItemToCart(id);
+            alert(message);
          },
       },
       created() {

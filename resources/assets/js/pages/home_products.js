@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
+import { truncateString, addItemToCart } from './lib';
 
 const homePageProducts = () => {
    const app = new Vue({
@@ -25,11 +26,7 @@ const homePageProducts = () => {
             );
          },
          stringLimit(string, value) {
-            if (string.length > value) {
-               return `${string.substring(0, value)}...`;
-            }
-
-            return string;
+            return truncateString(string, value);
          },
          loadMoreProducts() {
             const form = new FormData();
@@ -49,6 +46,10 @@ const homePageProducts = () => {
                app.count = response.data.count;
                app.loading = false;
             });
+         },
+         addToCart(id) {
+            const message = addItemToCart(id);
+            alert(message);
          },
          throttleEvents(listener, delay) {
             let timeout;
