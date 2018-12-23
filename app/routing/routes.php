@@ -43,5 +43,12 @@ $router->map(
    'product-details'
 );
 
+// CART
+$router->map(
+   'POST',
+   '/cart',
+   'App\Controllers\CartController@addItem', 
+   'add_cart_item'
+);
 
 require_once __DIR__ . '/admin_routes.php';
