@@ -36,9 +36,9 @@
 
          <div class="grid-x align-middle">
 
-            <div class="cell small-12 medium-5 large-4">
-               <div>
-                  <img :src="'/' + product.image_path" :alt=" product.name" width="100%">
+            <div class="cell grid-x align-center small-12 medium-5 large-4">
+               <div class="product__img">
+                  <img :src="'/' + product.image_path" :alt=" product.name">
                </div>
             </div>
 
@@ -53,6 +53,41 @@
 
          </div>
       
+      </section>
+
+      <section class="home" v-if="loading === false">
+
+         <div class="display-products">
+            
+         <h2>Similar Products</h2>
+            
+            <div class="grid-x">
+               
+               <div class="cell large-3 medium-6 small-12" v-cloak v-for="similar in similarProducts">
+
+                  <a href="'/product/' + similar.id">
+                     <div class="card" data-equalizer-watch>
+                        <div class="card-section">
+                           <img  :src="'/' + similar.image_path">
+                        </div>
+                        <div class="card-section">
+                           <p>@{{ stringLimit(similar.name, 15) }}</p>
+                           <a :href="'/product/' + similar.id" class="button more expanded">
+                              See More
+                           </a>
+                           <a :href="'/product/' + similar.id" class="button cart expanded alert">
+                              @{{ similar.price }} - Add to cart
+                           </a>
+                        </div>
+                     </div>
+                  </a>
+
+               </div>
+
+            </div>
+
+         </div>
+
       </section>
 
    </div>

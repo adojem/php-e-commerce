@@ -4,15 +4,14 @@ import axios from 'axios';
 const productDetails = () => {
    const app = new Vue({
       el: '#product',
-
       data: {
          product: [],
          category: [],
          subCategory: [],
+         similarProducts: [],
          productId: document.getElementById('product').dataset.id,
          loading: false,
       },
-
       methods: {
          getProductDetails() {
             this.loading = true;
@@ -21,22 +20,21 @@ const productDetails = () => {
                   app.product = response.data.product;
                   app.category = response.data.category;
                   app.subCategory = response.data.subCategory;
+                  app.similarProducts = response.data.similarProducts;
                   app.loading = false;
                });
             }, 1000);
          },
-      },
+         stringLimit(string, value) {
+            if (string.length > value) {
+               return `${string.substring(0, value)}...`;
+            }
 
+            return string;
+         },
+      },
       created() {
          this.getProductDetails();
-      },
-
-      stringLimit(string, value) {
-         if (string.length > value) {
-            return `${string.substring(0, value)}...`;
-         }
-
-         return string;
       },
    });
 };
