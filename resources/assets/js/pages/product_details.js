@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
+import $ from 'jquery';
 import { truncateString, addItemToCart } from './lib';
 
 const productDetails = () => {
@@ -30,8 +31,13 @@ const productDetails = () => {
             return truncateString(string, value);
          },
          addToCart(id) {
-            const message = addItemToCart(id);
-            alert(message);
+            addItemToCart(id, (message) => {
+               $('.notify')
+                  .css('display', 'block')
+                  .delay(4000)
+                  .slideUp(300)
+                  .html(message);
+            });
          },
       },
       created() {

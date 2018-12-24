@@ -12,6 +12,7 @@
 @import './pages/nav';
 @import './pages/home';
 @import './pages/product';
+@import './components/spinner';
 
 @include motion-ui-transitions;
 @include motion-ui-animations;

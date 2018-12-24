@@ -75,7 +75,7 @@
          </div>
 
          <div v-show="loading">
-            <i class="fas fa-spinner fa-spin" style="position:fixed; top:60%; color:#0a2b1d; font-size:3rem"></i>
+            <img src="/images/loading.gif" class="spinner">
          </div>
 
       </section>

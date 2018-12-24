@@ -7,7 +7,7 @@
    <div class="product" id="product" data-token="{{ $token }}" data-id={{ $product->id }}>
 
       <div v-show="loading" class="text-center">
-         <i class="fas fa-spinner fa-spin" style="margin-bottom:3rem; color:#0a2b1d; font-size:3rem"></i>
+         <img src="/images/loading.gif">
       </div>
 
       <section v-if="loading == false">

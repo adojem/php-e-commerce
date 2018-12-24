@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
+import $ from 'jquery';
 import { truncateString, addItemToCart } from './lib';
 
 const homePageProducts = () => {
@@ -28,7 +29,7 @@ const homePageProducts = () => {
          stringLimit(string, value) {
             return truncateString(string, value);
          },
-         loadMoreProducts() {
+         requestProducts() {
             const form = new FormData();
             const { token } = document.querySelector('.display-products').dataset;
             this.loading = true;
@@ -47,9 +48,19 @@ const homePageProducts = () => {
                app.loading = false;
             });
          },
+         loadMoreProducts() {
+            if (app.handleScrollBottom() && app.count < app.max) {
+               app.requestProducts();
+            }
+         },
          addToCart(id) {
-            const message = addItemToCart(id);
-            alert(message);
+            addItemToCart(id, (message) => {
+               $('.notify')
+                  .css('display', 'block')
+                  .delay(4000)
+                  .slideUp(300)
+                  .html(message);
+            });
          },
          throttleEvents(listener, delay) {
             let timeout;
@@ -65,21 +76,22 @@ const homePageProducts = () => {
          },
          handleScrollBottom() {
             const { documentElement } = window.document;
+
             if (
                Math.round(documentElement.scrollTop + documentElement.clientHeight)
                === documentElement.offsetHeight
             ) {
-               if (app.count < app.max) {
-                  app.loadMoreProducts();
-               }
+               return true;
             }
+
+            return false;
          },
       },
       created() {
          this.getFeaturedProducts();
       },
       mounted() {
-         window.addEventListener('scroll', this.throttleEvents(this.handleScrollBottom, 500));
+         window.addEventListener('scroll', this.throttleEvents(this.loadMoreProducts, 500));
       },
    });
 };
