@@ -73,7 +73,7 @@ class CartController extends BaseController
 
          $cartTotal = \number_format($cartTotal, 2);
          echo json_encode([
-            'item' => $result,
+            'items' => $result,
             'cartTotal' => $cartTotal
          ]);
          exit;
