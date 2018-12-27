@@ -128,4 +128,27 @@ class CartController extends BaseController
          }
       }
    }
+
+   public function removeItem()
+   {
+      if (Request::has('post')) {
+         $request = Request::get('post');
+         $data = json_decode($request->data);
+
+         if ($data->item_index === '') {
+            throw new Exception('Malicious Activity');
+         }
+
+         Cart::removeItem($data->item_index);
+         echo json_encode(['success' => 'Product Removed from Cart!']);
+         exit;
+      }
+   }
+
+   public function clearItems()
+   {
+      Cart::clear();
+      echo json_encode(['success' => 'Cart Items were removed']);
+      exit;
+   }
 }

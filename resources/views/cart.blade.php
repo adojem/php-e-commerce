@@ -67,7 +67,7 @@
                            <td>@{{ item.total }}</td>
 
                            <td class="text-center">
-                              <button>
+                              <button @click="removeItem(item.index)">
                                  <i class="fa fa-times" aria-hidden="true"></i>
                               </button>
                            </td>
@@ -108,13 +108,19 @@
                      </tr>
                   </table>
 
-                  <div class="text-right">
-                     <a href="/" class="button secondary">
-                        Continue Shopping &nbsp; <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                     </a>
-                     <button class="button success">
-                        Checkout &nbsp; <i class="fa fa-credit-card" aria-hidden="true"></i>
+                  <div class="grid-x align-justify">
+                     <button @click="clearCartItems()" id="clear-cart-item" class="button alert">
+                        Clear All &nbsp; <i class="fas fa-eraser" aria-hidden="true"></i>
                      </button>
+
+                     <span>
+                        <a href="/" class="button secondary">
+                           Continue Shopping &nbsp; <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </a>
+                        <button class="button success">
+                           Checkout &nbsp; <i class="fa fa-credit-card" aria-hidden="true"></i>
+                        </button>
+                     </span>
                   </div>
                </div>
             </div>

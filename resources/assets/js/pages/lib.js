@@ -29,3 +29,10 @@ export const addItemToCart = (id, callback) => {
       callback(response.data.success);
    });
 };
+
+export function createPostData(data) {
+   const postData = new FormData();
+   postData.append('data', JSON.stringify({ ...data }));
+
+   return postData;
+}

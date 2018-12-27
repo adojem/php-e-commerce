@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import axios from 'axios';
+import $ from 'jquery';
+import { createPostData } from './lib';
 
 const cart = () => {
    const app = new Vue({
@@ -30,14 +32,31 @@ const cart = () => {
             }, time);
          },
          updateQuantity(product_id, operator) {
-            const postData = new FormData();
-            const data = {
-               product_id,
-               operator,
-            };
+            const postData = createPostData({ product_id, operator });
 
-            postData.append('data', JSON.stringify(data));
             axios.post('/cart/update-qty', postData).then(response => app.displayItems(200));
+         },
+         removeItem(item_index) {
+            const postData = createPostData({ item_index });
+
+            axios.post('/cart/remove_item', postData).then((response) => {
+               $('.notify')
+                  .css('display', 'block')
+                  .delay(4000)
+                  .slideUp(300)
+                  .html(response.data.success);
+               app.displayItems(200);
+            });
+         },
+         clearCartItems() {
+            axios.get('/cart/clear_items').then((response) => {
+               $('.notify')
+                  .css('display', 'block')
+                  .delay(4000)
+                  .slideUp(300)
+                  .html(response.data.success);
+               app.displayItems(200);
+            });
          },
       },
       created() {
