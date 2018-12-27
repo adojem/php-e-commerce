@@ -12,7 +12,7 @@ const cart = () => {
          message: '',
       },
       methods: {
-         displayItems() {
+         displayItems(time) {
             this.loading = true;
             setTimeout(() => {
                axios.get('/cart/items').then((response) => {
@@ -27,11 +27,21 @@ const cart = () => {
                      app.loading = false;
                   }
                });
-            }, 2000);
+            }, time);
+         },
+         updateQuantity(product_id, operator) {
+            const postData = new FormData();
+            const data = {
+               product_id,
+               operator,
+            };
+
+            postData.append('data', JSON.stringify(data));
+            axios.post('/cart/update-qty', postData).then(response => app.displayItems(200));
          },
       },
       created() {
-         this.displayItems();
+         this.displayItems(2000);
       },
    });
 };

@@ -1,0 +1,13 @@
+button {
+   cursor: pointer;
+}
+
+.button {
+   &--plus {
+      color: #00aa00;
+   }
+
+   &--minus {
+      color: #ff8000;
+   }
+}

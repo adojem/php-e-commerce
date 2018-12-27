@@ -27,7 +27,9 @@ class CartController extends BaseController
             }
             
             Cart::add($data);
-            echo json_encode(['success' => 'Product Added to Cart Successfully']);
+            echo json_encode([
+               'success' => 'Product Added to Cart Successfully',
+            ]);
          }
       }
    }
@@ -36,7 +38,7 @@ class CartController extends BaseController
    {
       try {
          $result = array();
-         $carTotal = 0;
+         $cartTotal = 0;
 
          if (!Session::has('user_cart') || count(Session::get('user_cart')) < 1) {
             echo json_encode(['fail' => 'No item in the cart']);
@@ -44,6 +46,9 @@ class CartController extends BaseController
          }
 
          $index = 0;
+         // var_dump(Session::get('user_cart'));
+         // Session::remove('user_cart');
+         // exit;
 
          foreach ($_SESSION['user_cart'] as $cart_items) {
             $productId = $cart_items['product_id'];
@@ -80,6 +85,47 @@ class CartController extends BaseController
       }
       catch (Exception $ex) {
          // log this in database or email admin
+      }
+   }
+
+   public function updateQuantity()
+   {
+      if (Request::has('post')) {
+         $request = Request::get('post');
+         $data = json_decode($request->data);
+
+         if (!$data->product_id) {
+            throw new Exception('Malicious Activity');
+         }
+
+         $index = 0;
+         $quantity = '';
+         foreach ($_SESSION['user_cart'] as $cart_items) {
+            $index++;
+            foreach ($cart_items as $key => $value) {
+               if ($key == 'product_id' && $value == $data->product_id) {
+                  switch ($data->operator) {
+                     case '+':
+                        $quantity = $cart_items['quantity'] + 1;
+                        break;
+
+                     case '-':
+                        $quantity = $cart_items['quantity'] - 1;
+                        if ($quantity < 1) {
+                           $quantity = 1;
+                        }
+                        break;
+                  }
+
+                  array_splice($_SESSION['user_cart'], $index - 1, 1, array(
+                     [
+                        'product_id' => $data->product_id,
+                        'quantity' => $quantity
+                     ]
+                  ));
+               }
+            }
+         }
       }
    }
 }

@@ -6,7 +6,7 @@
 
    <div class="shopping_cart" id="shopping_cart">
 
-      <div v-show="loading" class="text-center">
+      <div v-show="loading" class="text-center spinner--top">
          <img src="/images/loading.gif">
       </div>
 
@@ -54,7 +54,15 @@
 
                            <td>@{{ item.price }}</td>
 
-                           <td>@{{ item.quantity }}</td>
+                           <td>
+                              @{{ item.quantity }}
+                              <button v-if="item.stock > item.quantity" @click="updateQuantity(item.id, '+')" types="button" class="button--plus">
+                                 <i class="fa fa-plus-square" aria-hidden="true"></i>
+                              </button>
+                              <button v-if="item.quantity > 1" @click="updateQuantity(item.id, '-')" types="button" class="button--minus">
+                                 <i class="fa fa-minus-square" aria-hidden="true"></i>
+                              </button>
+                           </td>
 
                            <td>@{{ item.total }}</td>
 

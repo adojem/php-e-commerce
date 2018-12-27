@@ -65,4 +65,11 @@ $router->map(
    'get_cart_items'
 );
 
+$router->map(
+   'POST',
+   '/cart/update-qty',
+   'App\Controllers\CartController@updateQuantity', 
+   'update_cart_qty'
+);
+
 require_once __DIR__ . '/admin_routes.php';
