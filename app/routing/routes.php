@@ -44,4 +44,5 @@ $router->map(
 );
 
 require_once __DIR__ . '/cart.php';
+require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/admin_routes.php';
