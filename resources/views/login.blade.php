@@ -15,7 +15,7 @@
                <h2 class="text-center">Login</h2>
                @include('includes.message')
                <form action="/login" method="post">
-                  <input type="text" name="username" placeholder="Your Username" value="{{ App\Classes\Request::old('post', 'username') }}">
+                  <input type="text" name="username" placeholder="Your Username or Email" value="{{ App\Classes\Request::old('post', 'username') }}">
                   <input type="password" name="password" placeholder="Your Password">
                   <input type="hidden" name="token" value="{{ App\Classes\CSRFToken::_token() }}">
                   <div class="grid-x align-spaced align-middle small-flex-dir-column">

@@ -1,13 +1,17 @@
 <div>
 
-   @if(count($errors))
+   @if(count($errors) || App\Classes\Session::has('error'))
       <div class="callout alert grid-x align-justify align-middle" data-closable>
          <div>
-            @foreach($errors as $error_array)
-               @foreach($error_array as $error_item)
-                  {{ $error_item }}<br>
+            @if(App\Classes\Session::has('error'))
+               {{ App\Classes\Session::flash('error') }}
+            @else
+               @foreach($errors as $error_array)
+                  @foreach($error_array as $error_item)
+                     {{ $error_item }}<br>
+                  @endforeach
                @endforeach
-            @endforeach
+            @endif
          </div>
 
          <button class="close-button" aria-label="Dismiss Message" type="button" data-close>
