@@ -59,12 +59,22 @@
             <ul class="dropdown menu vertical">
                @if (isAuthenticated())
                   <li>{{ user()->username }}</li>
-                  <li><a href="/cart">Cart</a></li>
+                  <li>
+                     <a href="/cart">
+                        Cart
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                     </a>
+                  </li>
                   <li><a href="/logout">Logout</a></li>
                @else
                   <li><a href="/login">Sign In</a></li>
                   <li><a href="/register">Register</a></li>
-                  <li><a href="/cart">Cart</a></li>
+                  <li>
+                     <a href="/cart">
+                        Cart
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                     </a>
+                  </li>
                @endif
             </ul>
          </div>
@@ -128,12 +138,22 @@
             <ul class="menu">
                @if (isAuthenticated())
                   <li>{{ user()->username }}</li>
-                  <li><a href="/cart">Cart</a></li>
+                  <li>
+                     <a href="/cart">
+                        Cart
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                     </a>
+                  </li>
                   <li><a href="/logout">Logout</a></li>
                @else
                   <li><a href="/login">Sign In</a></li>
                   <li><a href="/register">Register</a></li>
-                  <li><a href="/cart">Cart</a></li>
+                  <li>
+                     <a href="/cart">
+                        Cart
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                     </a>
+                  </li>
                @endif
             </ul>
          </div>

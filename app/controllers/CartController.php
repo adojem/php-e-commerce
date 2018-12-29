@@ -46,10 +46,6 @@ class CartController extends BaseController
          }
 
          $index = 0;
-         // var_dump(Session::get('user_cart'));
-         // Session::remove('user_cart');
-         // exit;
-
          foreach ($_SESSION['user_cart'] as $cart_items) {
             $productId = $cart_items['product_id'];
             $quantity = $cart_items['quantity'];

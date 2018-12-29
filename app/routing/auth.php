@@ -29,3 +29,11 @@ $router->map(
    'App\Controllers\AuthController@login', 
    'log_me_in'
 );
+
+// logout
+$router->map(
+   'GET',
+   '/logout',
+   'App\Controllers\AuthController@logout', 
+   'logout'
+);
