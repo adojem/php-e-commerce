@@ -1,4 +1,6 @@
-<?php $categories = \App\Models\Category::with('subCategories')->get(); ?>
+<?php
+   $categories = \App\Models\Category::with('subCategories')->get();
+?>
 
 <header class="navigation">
 
@@ -55,10 +57,15 @@
 
          <div class="top-bar-right">
             <ul class="dropdown menu vertical">
-               <li><a href="#">Username</a></li>
-               <li><a href="/login">Sign In</a></li>
-               <li><a href="/register">Register</a></li>
-               <li><a href="/cart">Cart</a></li>
+               @if (isAuthenticated())
+                  <li>{{ user()->username }}</li>
+                  <li><a href="/cart">Cart</a></li>
+                  <li><a href="/logout">Logout</a></li>
+               @else
+                  <li><a href="/login">Sign In</a></li>
+                  <li><a href="/register">Register</a></li>
+                  <li><a href="/cart">Cart</a></li>
+               @endif
             </ul>
          </div>
 
@@ -119,10 +126,15 @@
 
          <div class="top-bar-right">
             <ul class="menu">
-               <li><a href="#">Username</a></li>
-               <li><a href="/login">Sign In</a></li>
-               <li><a href="/register">Register</a></li>
-               <li><a href="/cart">Cart</a></li>
+               @if (isAuthenticated())
+                  <li>{{ user()->username }}</li>
+                  <li><a href="/cart">Cart</a></li>
+                  <li><a href="/logout">Logout</a></li>
+               @else
+                  <li><a href="/login">Sign In</a></li>
+                  <li><a href="/register">Register</a></li>
+                  <li><a href="/cart">Cart</a></li>
+               @endif
             </ul>
          </div>
 

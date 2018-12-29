@@ -11,6 +11,13 @@ use Exception;
 
 class AuthController extends BaseController
 {
+   public function __construct()
+   {
+      if (\isAuthenticated()) {
+         Redirect::to('/');
+      }
+   }
+
    public function showRegisterForm()
    {
       return view('register');
