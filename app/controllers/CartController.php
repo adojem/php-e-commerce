@@ -6,6 +6,8 @@ use App\Classes\Request;
 use App\Classes\Cart;
 use App\Classes\Session;
 use App\Models\Product;
+use Stripe\Charge;
+use Stripe\Customer;
 use Exception;
 
 class CartController extends BaseController
@@ -73,11 +75,13 @@ class CartController extends BaseController
          }
 
          $cartTotal = \number_format($cartTotal, 2);
+         Session::add('cartTotal', $cartTotal);
 
          echo json_encode([
             'items'         => $result,
             'cartTotal'     => $cartTotal,
-            'authenticated' => \isAuthenticated()
+            'authenticated' => \isAuthenticated(),
+            'amountInCents' => \convertMoneyToCents($cartTotal)
          ]);
          exit;
       }
@@ -148,5 +152,33 @@ class CartController extends BaseController
       Cart::clear();
       echo json_encode(['success' => 'Cart Items were removed']);
       exit;
+   }
+
+   public function checkout()
+   {
+      if (Request::has('post')) {
+         $request = Request::get('post');
+         $data = json_decode($request->data);
+
+         try {
+            $customer = Customer::create([
+               'email' => $data->stripeEmail,
+               'source' => $data->stripeToken
+            ]);
+
+            $charge = Charge::create([
+               'customer' => $customer->id,
+               'amount' => Session::get('cartTotal'),
+               'description' => user()->fullname . '-cart purchase',
+               'currency' => 'usd'
+            ]);
+
+            echo \json_encode(['customer' => $customer]);
+            exit;
+         }
+         catch (Exception $ex) {
+            echo $ex->getMessage();
+         }
+      }
    }
 }

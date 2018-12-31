@@ -1,4 +1,5 @@
 import axios from 'axios';
+import $ from 'jquery';
 
 export const truncateString = (string, value) => {
    if (string.length > value) {
@@ -7,8 +8,6 @@ export const truncateString = (string, value) => {
 
    return string;
 };
-
-export const getDom = eleName => document.querySelector(eleName);
 
 export const addItemToCart = (id, callback) => {
    const postData = new FormData();
@@ -30,9 +29,19 @@ export const addItemToCart = (id, callback) => {
    });
 };
 
+export const getDom = eleName => document.querySelector(eleName);
+
 export function createPostData(data) {
    const postData = new FormData();
    postData.append('data', JSON.stringify({ ...data }));
 
    return postData;
 }
+
+export const displayMessage = (element, message) => {
+   $(element)
+      .css('display', 'block')
+      .delay(4000)
+      .slideUp(300)
+      .html(message);
+};

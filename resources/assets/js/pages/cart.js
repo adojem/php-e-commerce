@@ -1,18 +1,22 @@
 import Vue from 'vue';
 import axios from 'axios';
-import $ from 'jquery';
-import { createPostData } from './lib';
+import { createPostData, displayMessage, getDom } from './lib';
 
 const cart = () => {
+   const {
+      dataset: { stripeKey },
+   } = getDom('#properties');
+
    const app = new Vue({
       el: '#shopping_cart',
       data: {
          items: [],
-         cartTotal: [],
+         cartTotal: 0,
          loading: false,
          fail: false,
          authenticated: false,
          message: '',
+         amountInCents: 0,
       },
       methods: {
          displayItems(time) {
@@ -29,6 +33,7 @@ const cart = () => {
                      app.cartTotal = response.data.cartTotal;
                      app.loading = false;
                      app.authenticated = response.data.authenticated;
+                     app.amountInCents = response.data.amountInCents;
                   }
                });
             }, time);
@@ -42,27 +47,49 @@ const cart = () => {
             const postData = createPostData({ item_index });
 
             axios.post('/cart/remove_item', postData).then((response) => {
-               $('.notify')
-                  .css('display', 'block')
-                  .delay(4000)
-                  .slideUp(300)
-                  .html(response.data.success);
+               displayMessage('.notify', response.data.success);
                app.displayItems(200);
             });
          },
          clearCartItems() {
             axios.get('/cart/clear_items').then((response) => {
-               $('.notify')
-                  .css('display', 'block')
-                  .delay(4000)
-                  .slideUp(300)
-                  .html(response.data.success);
+               displayMessage('.notify', response.data.success);
                app.displayItems(200);
+            });
+         },
+         checkout() {
+            Stripe.open({
+               name: 'ACME Store, Inc.',
+               description: 'Shopping Cart Items',
+               email: getDom('#properties').dataset.customerEmail,
+               amount: app.amountInCents,
+               zipCode: true,
             });
          },
       },
       created() {
          this.displayItems(2000);
+      },
+   });
+
+   const Stripe = StripeCheckout.configure({
+      key: stripeKey,
+      locale: 'auto',
+      token(token) {
+         console.log(token);
+
+         const data = createPostData({
+            stripeToken: token.id,
+            stripeEmail: token.email,
+         });
+
+         axios
+            .post('/cart/payment', data)
+            .then((response) => {
+               displayMessage('.notify', response.data.success);
+               app.displayItems(200);
+            })
+            .catch(error => console.log(error));
       },
    });
 };

@@ -42,3 +42,10 @@ $router->map(
    'App\Controllers\CartController@clearItems', 
    'clear_cart_items'
 );
+
+$router->map(
+   'POST',
+   '/cart/payment',
+   'App\Controllers\CartController@checkout', 
+   'handle_payment'
+);

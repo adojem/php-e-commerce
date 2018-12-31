@@ -16,6 +16,7 @@
 
 
    <script src="/js/all.js"></script>
+   @yield('stripe-checkout')
 </body>
 
 </html>
