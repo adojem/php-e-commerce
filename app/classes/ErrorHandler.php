@@ -35,6 +35,7 @@ class ErrorHandler {
    public static function emailAdmin($data) {
       $mail = new Mail;
       $mail->send($data);
+      
       return new static;
    }
 }

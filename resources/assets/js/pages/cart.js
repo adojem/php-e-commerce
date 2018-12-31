@@ -76,8 +76,6 @@ const cart = () => {
       key: stripeKey,
       locale: 'auto',
       token(token) {
-         console.log(token);
-
          const data = createPostData({
             stripeToken: token.id,
             stripeEmail: token.email,
