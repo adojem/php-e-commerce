@@ -5,6 +5,7 @@ use App\Classes\CSRFToken;
 use App\Classes\Request;
 use App\Classes\Cart;
 use App\Classes\Session;
+use App\Classes\Mail;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\Payment;
@@ -159,7 +160,9 @@ class CartController extends BaseController
    public function checkout()
    {
       if (Request::has('post')) {
-         $result = [];
+         $result['product'] = [];
+         $result['order_no'] = [];
+         $result['total'] = [];
          $request = Request::get('post');
          $data = json_decode($request->data);
 
@@ -202,7 +205,7 @@ class CartController extends BaseController
                $item->quantity -= $quantity;
                $item->save();
 
-               array_push($result, [
+               array_push($result['product'], [
                   'name' => $item->name,
                   'price' => $item->price,
                   'total' => $totalPrice,
@@ -216,6 +219,18 @@ class CartController extends BaseController
                'status' => $charge->status,
                'order_no' => $order_id
             ]);
+
+            $result['order_no'] = $order_id;
+            $result['total'] = Session::get('cartTotal');
+            $data = [
+               'to'      => user()->email,
+               'subject' => 'Order Confirmation',
+               'view'    => 'purchase',
+               'name'    => user()->fullname,
+               'body'    => $result
+            ];
+
+            (new Mail())->send($data);
          }
          catch (Exception $ex) {
             echo $ex->getMessage();
