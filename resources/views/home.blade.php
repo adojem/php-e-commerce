@@ -33,8 +33,11 @@
                            <a :href="'/product/' + feature.id" class="button more expanded">
                               See More
                            </a>
-                           <button @click.prevent="addToCart(feature.id)" type="button" class="button cart expanded alert">
+                           <button v-if="feature.quantity > 0" @click.prevent="addToCart(feature.id)" type="button" class="button cart expanded alert">
                               @{{ feature.price }} - Add to cart
+                           </button >
+                           <button v-else type="button" class="button cart expanded alert" disabled>
+                              Out of Stock
                            </button >
                         </div>
                      </div>
@@ -62,9 +65,12 @@
                            <a :href="'/product/' + product.id" class="button more expanded">
                               See More
                            </a>
-                           <button @click.prevent="addToCart(product.id)" type="button" :href="'/product/' + product.id" class="button cart expanded alert">
+                           <button v-if="product.quantity > 0" @click.prevent="addToCart(product.id)" type="button" :href="'/product/' + product.id" class="button cart expanded alert">
                               @{{ product.price }} - Add to cart
                            </button>
+                           <button v-else type="button" class="button cart expanded alert" disabled>
+                              Out of Stock
+                           </button >
                         </div>
                      </div>
                   </a>
