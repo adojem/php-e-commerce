@@ -1,0 +1,72 @@
+.dashboard {
+
+   .summary {
+
+      @include breakpoint(small only) {
+         padding-bottom: 1rem;
+      }
+
+      .card {
+         width: 95%;
+         margin: 0 auto;
+
+         .card-section {
+            .fa-shopping-cart {
+               color: #ff4500;
+            }
+   
+            .fa-money-bill-alt {
+               color: #00aa00;
+            }
+   
+            .fa-thermometer-empty {
+               color: #da8301;
+            }
+   
+            .fa-users {
+               color: #00bfff;
+            }
+         }
+
+         .card-divider {
+            background-color: #fff;
+            border-top: 1px solid #6c9a9d;
+
+            a {
+               color: #337ab7;
+            }
+         }
+      }
+   }
+
+   .graph {
+      margin: 2rem 0.5rem;
+
+      @include breakpoint(small only) {
+         margin-top: 1rem;
+      }
+
+      .card {
+         width: 98%;
+      }
+
+      canvas {
+         height: 300px !important;
+
+         @include breakpoint(small only) {
+            height: auto !important;
+         }
+      }
+   }
+}
+
+.card-summary {
+
+   &__head {
+      font-size: 2.5rem;
+   }
+
+   &__body {
+      text-align: right;
+   }
+}

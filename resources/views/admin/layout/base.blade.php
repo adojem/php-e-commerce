@@ -17,10 +17,10 @@
 
       <div class="title-bar">
          <div class="title-bar-left">
-            <button class="menu-icon hide-for-large" type="button" data-open="offCanvas"></button>
-            <h1 class="title-bar-title">{{ getenv('APP_NAME') }}</h1>
+            <button class="menu-icon show-for-medium" type="button" data-open="offCanvas"></button>
+            <h1 class="title-bar-title h4 hide-for-small">{{ getenv('APP_NAME') }}</h1>
          </div>
-         <div class="title-bar-right">
+         <div class="title-bar-right hide-for-medium">
             <button class="menu-icon" type="button" data-open="offCanvasRight"></button>
          </div>
       </div>
