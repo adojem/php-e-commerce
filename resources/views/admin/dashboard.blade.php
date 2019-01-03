@@ -16,7 +16,7 @@
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                      </div>
                      <div class="small-9 cell card-summary__body">
-                        <p>Total Orders</p><p>5000</p>
+                        <p>Total Orders</p><p>{{ $orders }}</p>
                      </div>
                   </div>
                </div>
@@ -37,7 +37,7 @@
                         <i class="fa fa-thermometer-empty" aria-hidden="true"></i>
                      </div>
                      <div class="small-9 cell card-summary__body">
-                        <p>Stock</p><p>5000</p>
+                        <p>Stock</p><p>{{ $products }}</p>
                      </div>
                   </div>
                </div>
@@ -58,7 +58,7 @@
                         <i class="fas fa-money-bill-alt" aria-hidden="true"></i>
                      </div>
                      <div class="small-9 cell card-summary__body">
-                        <p>Revenue</p><p>5000</p>
+                        <p>Revenue</p><p>${{ number_format($payments, 2)}}</p>
                      </div>
                   </div>
                </div>
@@ -79,7 +79,7 @@
                         <i class="fa fa-users" aria-hidden="true"></i>
                      </div>
                      <div class="small-9 cell card-summary__body">
-                        <p>Signup</p><p>5000</p>
+                        <p>Signup</p><p>{{ $users }}</p>
                      </div>
                   </div>
                </div>

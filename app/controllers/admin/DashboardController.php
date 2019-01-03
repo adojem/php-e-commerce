@@ -2,37 +2,52 @@
 
 namespace App\Controllers\Admin;
 
+use Illuminate\Database\Capsule\Manager as Capsule;
 use App\Classes\Request;
 use App\Classes\Session;
 use App\Controllers\BaseController;
+use App\Models\Order;
+use App\Models\Payment;
+use App\Models\Product;
+use App\Models\User;
 
 class DashboardController extends BaseController {
 
-   public function show() {
-      Session::add('admin', 'You are welcome, admin user');
-      Session::remove('admin');
+   public function show()
+   {
+      $orders = Order::all()->count();
+      $products = Product::all()->count();
+      $users = User::all()->count();
+      $payments = Payment::all()->sum('amount');
 
-      if (Session::has('admin')) {
-         $msg = Session::get('admin');
-      }
-      else {
-         $msg = 'Not defined';
-      }
-
-      return view('admin/dashboard', ['admin' => $msg]);
+      return view(
+         'admin/dashboard',
+         compact(
+            'orders',
+            'products',
+            'payments',
+            'users'
+         )
+      );
    }
 
-   public function get() {
-      Request::refresh();
-      $data = Request::old('post', 'product');
-      var_dump($data);
-      exit;
-      // if (Request::has('post')) {
-      //    $request = Request::get('post');
-      //    var_dump($request->product);
-      // }
-      // else {
-      //    var_dump('posting doesnt exists');
-      // }
+   public function getChartData()
+   {
+      $revenue = Capsule::table('payments')->select(
+         Capsule::raw('sum(amount) as `amount`'),
+         Capsule::raw("DATE_FORMAT(created_at, '%m-%Y') new_date"),
+         Capsule::raw('YEAR(created_at) year, Month(created_at) month')
+      )->groupBy('year', 'month')->get();
+
+      $orders = Capsule::table('orders')->select(
+         Capsule::raw('count(id) as `count`'),
+         Capsule::raw("DATE_FORMAT(created_at, '%m-%Y') new_date"),
+         Capsule::raw('YEAR(created_at) year, Month(created_at) month')
+      )->groupBy('year', 'month')->get();
+
+      echo json_encode([
+         'revenue' => $revenue,
+         'orders' => $orders
+      ]);
    }
 }
