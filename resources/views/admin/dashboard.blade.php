@@ -95,7 +95,7 @@
 
       <div class="grid-x expanded graph" data-equilizer data-equilizer-on="medium">
 
-         <div class="small-12 medium-6 cell monthy-salse">
+         <div class="small-12 large-6 cell monthly-salse">
 
             <div class="card">
                <div class="card-section">
@@ -106,7 +106,7 @@
 
          </div>
 
-         <div class="small-12 medium-6 cell monthy-revenue">
+         <div class="small-12 large-6 cell monthly-revenue">
 
             <div class="card">
                <div class="card-section">

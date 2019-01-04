@@ -24,6 +24,10 @@ $(document).ready(() => {
          admin.remove();
          break;
 
+      case 'adminDashboard':
+         admin.dashboard();
+         break;
+
       case 'adminCategories':
          admin.update();
          admin.remove();
