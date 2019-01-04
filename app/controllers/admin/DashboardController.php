@@ -4,6 +4,8 @@ namespace App\Controllers\Admin;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use App\Classes\Request;
+use App\Classes\Redirect;
+use App\Classes\Role;
 use App\Classes\Session;
 use App\Controllers\BaseController;
 use App\Models\Order;
@@ -11,7 +13,14 @@ use App\Models\Payment;
 use App\Models\Product;
 use App\Models\User;
 
-class DashboardController extends BaseController {
+class DashboardController extends BaseController
+{
+   public function __construct()
+   {
+      if (!Role::middleware('admin')) {
+         Redirect::to('/login');
+      }
+   }
 
    public function show()
    {

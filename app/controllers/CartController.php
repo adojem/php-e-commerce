@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Classes\CSRFToken;
 use App\Classes\Request;
+use App\Classes\Role;
 use App\Classes\Cart;
 use App\Classes\Session;
 use App\Classes\Mail;
@@ -15,6 +16,13 @@ use Exception;
 
 class CartController extends BaseController
 {
+   public function __construct()
+   {
+      // if (!Role::middleware('user') || !Role::middleware('admin')) {
+      //    Redirect::to('/login');
+      // }
+   }
+
    public function show()
    {
       return view('cart');

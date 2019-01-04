@@ -84,7 +84,7 @@ class AuthController extends BaseController
 
             Request::refresh();
 
-            return view('register', [
+            return view('login', [
                'success' => 'Account created, please login'
             ]);
          }
@@ -129,7 +129,15 @@ class AuthController extends BaseController
                Session::add('SESSION_USER_ID', $user->id);
                Session::add('SESSION_USER_NAME', $user->username);
 
-               Redirect::to('/');
+               if ($user->role == 'admin') {
+                  Redirect::to('/admin');
+               }
+               else if ($user->role == 'user' && Session::has('user_cart')) {
+                  Redirect::to('/cart');
+               }
+               else {
+                  Redirect::to('/');
+               }
             }
 
             Session::add('error', 'User not found, please try again');

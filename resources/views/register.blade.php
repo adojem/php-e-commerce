@@ -19,7 +19,7 @@
                   <input type="email" name="email" placeholder="Your Email Address" value="{{ App\Classes\Request::old('post', 'email') }}">
                   <input type="text" name="username" placeholder="Your Username" value="{{ App\Classes\Request::old('post', 'username') }}">
                   <input type="password" name="password" placeholder="Your Password">
-                  <textarea name="address">{{App\Classes\Request::old('post', 'username')}}</textarea>
+                  <textarea name="address">{{App\Classes\Request::old('post', 'address')}}</textarea>
                   <input type="hidden" name="token" value="{{ App\Classes\CSRFToken::_token() }}">
                   <button class="button float-right">Register</button>
                </form>

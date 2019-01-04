@@ -4,13 +4,15 @@ namespace App\Controllers\Admin;
 use App\Classes\CSRFToken;
 use App\Classes\Redirect;
 use App\Classes\Request;
+use App\Classes\Role;
 use App\Classes\Session;
 use App\Classes\ValidateRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Controllers\BaseController;
 
-class ProductCategoryController extends BaseController {
+class ProductCategoryController extends BaseController
+{
 
    public $table_name = 'categories';
    public $categories;
@@ -20,6 +22,10 @@ class ProductCategoryController extends BaseController {
 
    public function __construct()
    {
+      if (!Role::middleware('admin')) {
+         Redirect::to('/login');
+      }
+      
       $total = Category::all()->count();
       $subtotal = SubCategory::all()->count();
       $object = new Category;
