@@ -6,7 +6,7 @@
 
    <div class="products grid-container">
       <div>
-         <h2>Manage Inventory</h2><hr>
+         <h2>Manage Inventory</h2>
       </div>
 
       @include('includes.message')
