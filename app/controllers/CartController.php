@@ -205,7 +205,7 @@ class CartController extends BaseController
                   'product_id' => $productId,
                   'unit_price' => $item->price,
                   'status' => 'Pending',
-                  'qunatity' => $quantity,
+                  'quantity' => $quantity,
                   'total' => $totalPrice,
                   'order_no' => $order_id
                ]);

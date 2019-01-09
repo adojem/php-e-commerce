@@ -64,7 +64,7 @@
                </div>
                <div class="card-divider">
                   <div class="grid-x">
-                     <a href="#">Payment Details</a>
+                     <a href="/admin/payments">Payment Details</a>
                   </div>
                </div>
             </div>

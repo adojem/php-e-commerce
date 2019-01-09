@@ -6,7 +6,7 @@
 
    <div class="products grid-container">
       <div>
-         <h2>Orders</h2>
+         <h2>Payments by {{ $payments ? $payments[0]->fullname : '' }}</h2>
       </div>
 
       @include('includes.message')
@@ -14,21 +14,21 @@
       <div class="grid-x grid-padding-x">
 
          <div class="small-12 medium-12 cell">
-            @if (count($orders))
+            @if ($payments)
                <table class="over unstriped" data-form="deleteForm">
                   <thead>
                      <tr>
-                        <th>Order No.</th>
-                        <th>Total Price</th>
                         <th>Date</th>
+                        <th>Total Payment</th>
+                        <th>Order No.</th>
                      </tr>
                   </thead>
                   <tbody>
-                     @foreach($orders as $order)
+                     @foreach($payments as $payment)
                         <tr>
-                           <td><a href="/admin/orders/{{ $order->order_no }}">{{ $order->order_no }}</a></td>
-                           <td>{{ $order->total_price }}</td>
-                           <td>{{ $order->date }}</td>
+                           <td>{{$payment->date}}</td>
+                           <td>{{$payment->payment}}</td>
+                           <td><a href="/admin/orders/{{ $payment->order_no }}">{{$payment->order_no}}</a></td>
                         </tr>
                      @endforeach
                   </tbody>
@@ -37,7 +37,6 @@
                {!! $links !!}
             @else
                <h2>Your have no orders</h2>
-               {{ $action }}
             @endif
          </div>
 

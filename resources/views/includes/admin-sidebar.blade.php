@@ -28,7 +28,7 @@
          <a href="/admin/orders"><i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>&nbsp; View Orders</a>
       </li>
       <li>
-         <a href="/admin/users/payments"><i class="fa fa-money-bill-alt fa-fw" aria-hidden="true"></i>&nbsp; Payments</a>
+         <a href="/admin/payments"><i class="fa fa-money-bill-alt fa-fw" aria-hidden="true"></i>&nbsp; Payments</a>
       </li>
       <li>
          <a href="/logout"><i class="fa fa-sign-in-alt fa-fw" aria-hidden="true"></i>&nbsp; Logout</a>

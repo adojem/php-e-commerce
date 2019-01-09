@@ -25,6 +25,21 @@ $router->map(
    'App\Controllers\Admin\DashboardController@showOrderDetails', 'admin_dashboard_order_details'
 );
 
+// payments
+$router->map(
+   'GET',
+   '/admin/payments',
+   'App\Controllers\Admin\DashboardController@showPayments',
+   'admin_dashboard_payments'
+);
+
+$router->map(
+   'GET',
+   '/admin/payments/[i:id]',
+   'App\Controllers\Admin\DashboardController@showPaymentDetails',
+   'admin_dashboard_payment_details'
+);
+
 // product management routes
 $router->map(
    'GET',
@@ -124,5 +139,3 @@ $router->map(
    'App\Controllers\Admin\ProductController@delete',
    'delete_product'
 );
-
-

@@ -6,7 +6,7 @@
 
    <div class="products grid-container">
       <div>
-         <h2>Orders</h2>
+         <h2>Payments</h2>
       </div>
 
       @include('includes.message')
@@ -14,21 +14,19 @@
       <div class="grid-x grid-padding-x">
 
          <div class="small-12 medium-12 cell">
-            @if (count($orders))
+            @if ($payments)
                <table class="over unstriped" data-form="deleteForm">
                   <thead>
                      <tr>
-                        <th>Order No.</th>
-                        <th>Total Price</th>
-                        <th>Date</th>
+                        <th>User Name</th>
+                        <th>Total Payment</th>
                      </tr>
                   </thead>
                   <tbody>
-                     @foreach($orders as $order)
+                     @foreach($payments as $payment)
                         <tr>
-                           <td><a href="/admin/orders/{{ $order->order_no }}">{{ $order->order_no }}</a></td>
-                           <td>{{ $order->total_price }}</td>
-                           <td>{{ $order->date }}</td>
+                           <td><a href="/admin/payments/{{ $payment->user_id }}">{{$payment->fullname}}</a></td>
+                           <td>{{$payment->amount}}</td>
                         </tr>
                      @endforeach
                   </tbody>
@@ -37,7 +35,6 @@
                {!! $links !!}
             @else
                <h2>Your have no orders</h2>
-               {{ $action }}
             @endif
          </div>
 
