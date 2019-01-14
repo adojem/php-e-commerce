@@ -11,6 +11,12 @@ $router->map(
 
 $router->map(
    'GET',
+   '/products','App\Controllers\IndexController@showAllProducts', 
+   'all_products'
+);
+
+$router->map(
+   'GET',
    '/featured','App\Controllers\IndexController@featuredProducts', 
    'feature_product'
 );
@@ -22,8 +28,14 @@ $router->map(
 );
 
 $router->map(
+   'GET',
+   '/get-allproducts','App\Controllers\IndexController@getAllProducts', 
+   'get_all_products'
+);
+
+$router->map(
    'POST',
-   '/load-more',
+   '/load-more/[a:action]',
    'App\Controllers\IndexController@loadMoreProducts', 
    'load_more_product'
 );

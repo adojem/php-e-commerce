@@ -16,6 +16,13 @@ class IndexController extends BaseController
       return view('home', compact('token'));
    }
 
+   public function showAllProducts()
+   {
+      $token = CSRFToken::_token();
+
+      return view('products', compact('token'));
+   }
+
    public function featuredProducts()
    {
       $products = Product::where('featured', 1)->inRandomOrder()->limit(4)->get();
@@ -23,10 +30,10 @@ class IndexController extends BaseController
       echo \json_encode(['featured' => $products]);
    }
 
-   public function getProducts()
+   public function getAllProducts()
    {
-      $products = Product::where('featured', 0)->skip(0)->take(4)->get();
-      $max_num = Product::where('featured', 0)->count();
+      $products = Product::notDeleted()->take(6)->get();
+      $max_num = Product::notDeleted()->count();
 
       echo \json_encode([
          'products' => $products,
@@ -35,7 +42,19 @@ class IndexController extends BaseController
       ]);
    }
 
-   public function loadMoreProducts()
+   public function getProducts()
+   {
+      $products = Product::notDeleted()->notFeatured()->skip(0)->take(4)->get();
+      $max_num = Product::notDeleted()->notFeatured()->count();
+      
+      echo \json_encode([
+         'products' => $products,
+         'count' => count($products),
+         'max_num' => $max_num
+      ]);
+   }
+
+   public function loadMoreProducts($action)
    {
       $request = Request::get('post');
       $data = json_decode($request->data);
@@ -43,7 +62,12 @@ class IndexController extends BaseController
       if (CSRFToken::verifyCSRFToken($data->token, false)) {
          $count = $data->count;
          $item_per_page = $count + $data->next;
-         $products = Product::where('featured', 0)->skip(0)->take($item_per_page)->get();
+         if ($action['action'] == 'all') {
+            $products = Product::notDeleted()->skip(0)->take($item_per_page)->get();
+         }
+         if ($action['action'] == 'notFeatured') {
+            $products = Product::notDeleted()->notFeatured()->skip(0)->take($item_per_page)->get();
+         }
       }
 
       echo \json_encode([

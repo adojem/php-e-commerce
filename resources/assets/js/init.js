@@ -11,6 +11,11 @@ $(document).ready(() => {
          pages.homePageProducts();
          break;
 
+      case 'products':
+         pages.initCarousel();
+         pages.allProducts();
+         break;
+
       case 'product':
          pages.productDetails();
          break;

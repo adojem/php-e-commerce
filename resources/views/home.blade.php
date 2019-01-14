@@ -23,7 +23,7 @@
             <div class="grid-x">
                
                <div class="cell large-3 medium-6 small-12" v-cloak v-for="feature in featured">
-                  <a href="'/product/' + feature.id">
+                  <a :href="'/product/' + feature.id">
                      <div class="card" data-equalizer-watch>
                         <div class="card-section">
                            <img  :src="'/' + feature.image_path" width="100%" height="200">
@@ -55,7 +55,7 @@
             <div class="grid-x">
                
                <div class="cell large-3 medium-6 small-12" v-cloak v-for="product in products">
-                  <a href="'/product/' + product.id">
+                  <a :href="'/product/' + product.id">
                      <div class="card" data-equalizer-watch>
                         <div class="card-section">
                            <img  :src="'/' + product.image_path" width="100%" height="200">

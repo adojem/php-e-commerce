@@ -86,6 +86,8 @@ class DashboardController extends BaseController
       view('admin/payments/payment', compact('payments'));
    }
 
+   public function show
+
    public function getChartData()
    {
       $revenue = Capsule::table('payments')->select(

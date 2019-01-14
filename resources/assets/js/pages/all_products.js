@@ -1,31 +1,27 @@
 import Vue from 'vue';
 import axios from 'axios';
 import {
-   truncateString, addItemToCart, createPostData, getDom, displayMessage,
+   truncateString, addItemToCart, createPostData, displayMessage, getDom,
 } from './lib';
 
-const homePageProducts = () => {
+const allProducts = () => {
    const app = new Vue({
       el: '#root',
       data: {
-         featured: [],
          products: [],
          count: 0,
          max: 0,
          loading: false,
       },
       methods: {
-         getFeaturedProducts() {
-            this.loading = true;
-            axios.all([axios.get('/featured'), axios.get('/get-products')]).then(
-               axios.spread((featuredResponse, productsResponse) => {
-                  app.featured = featuredResponse.data.featured;
-                  app.products = productsResponse.data.products;
-                  app.count = productsResponse.data.count;
-                  app.max = productsResponse.data.max_num;
-                  app.loading = false;
-               }),
-            );
+         getAllProducts() {
+            this.load = true;
+            axios.get('/get-allproducts').then((response) => {
+               app.products = response.data.products;
+               app.count = response.data.count;
+               app.max = response.data.max_num;
+               app.loading = false;
+            });
          },
          stringLimit(string, value) {
             return truncateString(string, value);
@@ -39,7 +35,7 @@ const homePageProducts = () => {
                count: app.count,
             });
 
-            axios.post('/load-more/notFeatured', data).then((response) => {
+            axios.post('/load-more/all', data).then((response) => {
                app.products = response.data.products;
                app.count = response.data.count;
                app.loading = false;
@@ -81,7 +77,7 @@ const homePageProducts = () => {
          },
       },
       created() {
-         this.getFeaturedProducts();
+         this.getAllProducts();
       },
       mounted() {
          window.addEventListener('scroll', this.throttleEvents(this.loadMoreProducts, 500));
@@ -89,4 +85,4 @@ const homePageProducts = () => {
    });
 };
 
-export default homePageProducts;
+export default allProducts;

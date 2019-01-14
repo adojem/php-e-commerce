@@ -55,4 +55,14 @@ class Product extends Model {
 
       return $products;
    }
+
+   public function scopeNotDeleted($query)
+   {
+      return $query->where('deleted_at', NULL);
+   }
+
+   public function scopeNotFeatured($query)
+   {
+      return $query->where('featured', false);
+   }
 }

@@ -104,7 +104,7 @@
             data-click-open="true"
             data-close-on-click-inside="false">
             
-               <li>Acme Products</li>
+               <li><a href="/products">Acme Products</a></li>
 
                @if (count($categories))
                <li>
