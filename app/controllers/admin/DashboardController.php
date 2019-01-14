@@ -25,7 +25,7 @@ class DashboardController extends BaseController
       $orders = Order::all()->count();
       $products = Product::all()->count();
       $users = User::all()->count();
-      $payments = Payment::all()->sum('amount');
+      $payments = Payment::all()->sum('amount') / 100;
 
       return view(
          'admin/dashboard',
@@ -86,12 +86,10 @@ class DashboardController extends BaseController
       view('admin/payments/payment', compact('payments'));
    }
 
-   public function show
-
    public function getChartData()
    {
       $revenue = Capsule::table('payments')->select(
-         Capsule::raw('sum(amount) as `amount`'),
+         Capsule::raw('sum(amount) /100 as `amount`'),
          Capsule::raw("DATE_FORMAT(created_at, '%m-%Y') new_date"),
          Capsule::raw('YEAR(created_at) year, Month(created_at) month')
       )->groupBy('year', 'month')->get();
