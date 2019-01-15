@@ -4,7 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Order extends Model {
+class OrdereDetail extends Model {
    
    use SoftDeletes;
 
@@ -12,6 +12,11 @@ class Order extends Model {
    protected $fillable = [
       'user_id',
       'order_no',
+      'product_id',
+      'unit_price',
+      'quantity',
+      'status',
+      'total'
    ];
    protected $dates = ['deleted_at'];
 }
