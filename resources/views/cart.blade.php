@@ -4,6 +4,9 @@
 @section('stripe-checkout')
    <script src="https://checkout.stripe.com/checkout.js"></script>
 @endsection
+@section('paypal-checkout')
+   <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+@endsection
 
 @section('content')
 
@@ -113,18 +116,23 @@
                         </tr>
                      </table>
    
-                     <div class="grid-x align-justify">
-                        <button @click="clearCartItems()" id="clear-cart-item" class="button alert">
-                           Clear All &nbsp; <i class="fas fa-eraser" aria-hidden="true"></i>
-                        </button>
+                     <s class="grid-x align-justify">
+                        <span>
+                           <button @click="clearCartItems()" id="clear-cart-item" class="button alert">
+                              Clear All &nbsp; <i class="fas fa-eraser" aria-hidden="true"></i>
+                           </button>
+                        </span>
    
                         <span>
                            <a href="/" class="button secondary">
                               Continue Shopping &nbsp; <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                            </a>
-                           <button @click.prevent="checkout" v-if="authenticated" class="button success">
-                              Checkout &nbsp; <i class="fa fa-credit-card" aria-hidden="true"></i>
-                           </button>
+                           <span v-if="authenticated">
+                              <button @click.prevent="checkout" class="button success">
+                                 Payment With Card &nbsp; <i class="fa fa-credit-card" aria-hidden="true"></i>
+                              </button>
+                              <span id="paypalBtn"></span>
+                           </span>
                            <span v-else>
                               <a href="/login" class="button success">
                                  Checkout &nbsp; <i class="fa fa-credit-card" aria-hidden="true"></i>
@@ -133,7 +141,6 @@
                            <span id="properties" class="hide"
                               data-customer-email="{{ user()->email }}"
                               data-stripe-key="{{ App\Classes\Session::get('publishable_key') }}">
-
                            </span>
                         </span>
                      </div>

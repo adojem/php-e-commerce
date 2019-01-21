@@ -41,7 +41,8 @@ const cart = () => {
          updateQuantity(product_id, operator) {
             const postData = createPostData({ product_id, operator });
 
-            axios.post('/cart/update-qty', postData).then(response => app.displayItems(200));
+            axios.post('/cart/update-qty', postData).then(response => app.displayItems(10));
+            app.paypalCheckout(1000);
          },
          removeItem(item_index) {
             const postData = createPostData({ item_index });
@@ -50,6 +51,7 @@ const cart = () => {
                displayMessage('.notify', response.data.success);
                app.displayItems(200);
             });
+            app.paypalCheckout(1000);
          },
          clearCartItems() {
             axios.get('/cart/clear_items').then((response) => {
@@ -66,9 +68,44 @@ const cart = () => {
                zipCode: true,
             });
          },
+         paypalCheckout(time) {
+            setTimeout(() => {
+               if (getDom('#paypalBtn')) {
+                  paypal.Button.render(
+                     {
+                        // Configure environment
+                        env: 'sandbox',
+                        client: {
+                           sandbox: process.env.PAYPAL_CLIENT_ID,
+                           production: 'demo_production_client_id',
+                        },
+                        // Customize button (optional)
+                        locale: 'en_US',
+                        style: {
+                           size: 'small',
+                           color: 'gold',
+                           shape: 'pill',
+                        },
+
+                        // Enable Pay Now checkout flow (optional)
+                        commit: true,
+
+                        // Set up a payment
+                        payment(data) {},
+                        // Execute the payment
+                        onAuthorize(data) {},
+                     },
+                     '#paypalBtn',
+                  );
+               }
+            }, time);
+         },
       },
       created() {
-         this.displayItems(2000);
+         this.displayItems(1000);
+      },
+      mounted() {
+         this.paypalCheckout(2000);
       },
    });
 
