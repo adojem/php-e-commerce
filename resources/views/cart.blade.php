@@ -132,6 +132,7 @@
                                  Payment With Card &nbsp; <i class="fa fa-credit-card" aria-hidden="true"></i>
                               </button>
                               <span id="paypalBtn"></span>
+                              <span id="paypalInfo"></span>
                            </span>
                            <span v-else>
                               <a href="/login" class="button success">

@@ -256,4 +256,14 @@ class CartController extends BaseController
          ]);
       }
    }
+
+   public function paypalCreatePayment()
+   {
+
+   }
+
+   public function paypalExecutePayment()
+   {
+      
+   }
 }

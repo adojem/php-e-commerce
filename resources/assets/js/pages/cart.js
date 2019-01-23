@@ -71,10 +71,22 @@ const cart = () => {
          paypalCheckout(time) {
             setTimeout(() => {
                if (getDom('#paypalBtn')) {
+                  const paypalInfo = getDom('#paypalInfo');
+                  const baseUrl = process.env.APP_URL;
+                  const environment = process.env.APP_ENV;
+                  let env = 'sandbox';
+
+                  if (environment === 'production') {
+                     env = 'production';
+                  }
+
+                  const CREATE_PAYMENT_ROUTE = `${baseUrl}/paypal/create-payment`;
+                  const CREATE_PAYMENT_EXECUTE = `${baseUrl}/paypal/execute-payment`;
+
                   paypal.Button.render(
                      {
                         // Configure environment
-                        env: 'sandbox',
+                        env,
                         client: {
                            sandbox: process.env.PAYPAL_CLIENT_ID,
                            production: 'demo_production_client_id',
@@ -91,7 +103,12 @@ const cart = () => {
                         commit: true,
 
                         // Set up a payment
-                        payment(data) {},
+                        payment() {
+                           return paypal.request
+                              .post(CREATE_PAYMENT_ROUTE)
+                              .then(data => data.id)
+                              .catch(err => console.log(err));
+                        },
                         // Execute the payment
                         onAuthorize(data) {},
                      },

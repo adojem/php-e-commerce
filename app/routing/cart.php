@@ -43,9 +43,24 @@ $router->map(
    'clear_cart_items'
 );
 
+// Payments
 $router->map(
    'POST',
    '/cart/payment',
    'App\Controllers\CartController@checkout', 
    'handle_payment'
+);
+
+$router->map(
+   'POST',
+   '/cart/paypal/create-payment',
+   'App\Controllers\CartController@paypalCreatePayment', 
+   'paypal_create_payment'
+);
+
+$router->map(
+   'POST',
+   '/cart/paypal/execute-payment',
+   'App\Controllers\CartController@paypalExecutePayment', 
+   'paypal_execute_payment'
 );
