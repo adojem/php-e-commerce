@@ -53,14 +53,14 @@ $router->map(
 
 $router->map(
    'POST',
-   '/cart/paypal/create-payment',
+   '/paypal/create-payment',
    'App\Controllers\CartController@paypalCreatePayment', 
    'paypal_create_payment'
 );
 
 $router->map(
    'POST',
-   '/cart/paypal/execute-payment',
+   '/paypal/execute-payment',
    'App\Controllers\CartController@paypalExecutePayment', 
    'paypal_execute_payment'
 );

@@ -14,7 +14,8 @@
         "league/oauth2-client": "^2.3",
         "voku/pagination": "^3.0",
         "nesbot/carbon": "^1.34",
-        "stripe/stripe-php": "^6.27"
+        "stripe/stripe-php": "^6.27",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "filp/whoops": "^2.2"
