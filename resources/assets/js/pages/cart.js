@@ -110,7 +110,17 @@ const cart = () => {
                               .catch(err => console.log(err));
                         },
                         // Execute the payment
-                        onAuthorize(data) {},
+                        onAuthorize(data) {
+                           return paypal.request
+                              .post(CREATE_PAYMENT_EXECUTE, {
+                                 paymentId: data.paymentID,
+                                 payerId: data.payerID,
+                              })
+                              .then((response) => {
+                                 displayMessage('.notify', response.success);
+                                 app.displayItems(200);
+                              });
+                        },
                      },
                      '#paypalBtn',
                   );
