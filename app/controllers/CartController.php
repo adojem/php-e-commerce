@@ -5,6 +5,7 @@ use App\Classes\CSRFToken;
 use App\Classes\Request;
 use App\Classes\Role;
 use App\Classes\Cart;
+use App\Classes\PayableTrait;
 use App\Classes\Session;
 use App\Classes\Mail;
 use App\Models\Product;
@@ -18,6 +19,8 @@ use Exception;
 
 class CartController extends BaseController
 {
+   use PayableTrait;
+
    protected $paypal_base_url;
 
    public function __construct()
@@ -175,9 +178,7 @@ class CartController extends BaseController
    public function checkout()
    {
       if (Request::has('post')) {
-         $result['product'] = [];
-         $result['order_no'] = [];
-         $result['total'] = [];
+         
          $request = Request::get('post');
          $data = json_decode($request->data);
 
@@ -195,62 +196,7 @@ class CartController extends BaseController
                'currency' => 'usd'
             ]);
 
-            $order_id = strtoupper(uniqid());
-
-            foreach ($_SESSION['user_cart'] as $cart_items) {
-               $productId = $cart_items['product_id'];
-               $quantity = $cart_items['quantity'];
-               $item = Product::where('id', $productId)->first();
-
-               if (!$item) { continue; }
-
-               $totalPrice = $item->price * $quantity;
-               $totalPrice = \number_format($totalPrice, 2);
-
-               OrderDetail::create([
-                  'user_id' => user()->id,
-                  'product_id' => $productId,
-                  'unit_price' => $item->price,
-                  'status' => 'Pending',
-                  'quantity' => $quantity,
-                  'total' => $totalPrice,
-                  'order_no' => $order_id
-               ]);
-
-               $item->quantity -= $quantity;
-               $item->save();
-
-               array_push($result['product'], [
-                  'name' => $item->name,
-                  'price' => $item->price,
-                  'total' => $totalPrice,
-                  'quantity' => $quantity,
-               ]);
-            }
-
-            Order::create([
-               'user_id' => user()->id,
-               'order_no' => $order_id
-            ]);
-
-            Payment::create([
-               'user_id' => user()->id,
-               'amount' => $charge->amount,
-               'status' => $charge->status,
-               'order_no' => $order_id
-            ]);
-
-            $result['order_no'] = $order_id;
-            $result['total'] = Session::get('cartTotal');
-            $data = [
-               'to'      => user()->email,
-               'subject' => 'Order Confirmation',
-               'view'    => 'purchase',
-               'name'    => user()->fullname,
-               'body'    => $result
-            ];
-
-            (new Mail())->send($data);
+            $this->logPaymentAndMailClient('stripe', $charge);
             
             Cart::clear();
             echo json_encode([
@@ -328,9 +274,6 @@ class CartController extends BaseController
 
    public function paypalExecutePayment()
    {
-      $result['product'] = [];
-      $result['order_no'] = [];
-      $result['total'] = [];
       $request = Request::get('post');
 
       $payer_id = $request->payerId;
@@ -350,64 +293,7 @@ class CartController extends BaseController
       $response = \json_decode($paymentResponse->getBody(), true);
 
       try {
-
-         $order_id = $response['transactions'][0]['custom'];
-         $productIds = [];
-
-         foreach ($_SESSION['user_cart'] as $cart_items) {
-            $productId = $cart_items['product_id'];
-            $quantity = $cart_items['quantity'];
-            $item = Product::where('id', $productId)->first();
-
-            if (!$item) { continue; }
-
-            $totalPrice = $item->price * $quantity;
-            $totalPrice = \number_format($totalPrice, 2);
-
-            OrderDetail::create([
-               'user_id' => user()->id,
-               'product_id' => $productId,
-               'unit_price' => $item->price,
-               'status' => 'Pending',
-               'quantity' => $quantity,
-               'total' => $totalPrice,
-               'order_no' => $order_id
-            ]);
-
-            $item->quantity -= $quantity;
-            $item->save();
-
-            array_push($result['product'], [
-               'name' => $item->name,
-               'price' => $item->price,
-               'total' => $totalPrice,
-               'quantity' => $quantity,
-            ]);
-         }
-
-         Order::create([
-            'user_id' => user()->id,
-            'order_no' => $order_id
-         ]);
-
-         Payment::create([
-            'user_id' => user()->id,
-            'amount' => $response['transactions'][0]['amount']['total'],
-            'status' => $response['state'],
-            'order_no' => $order_id
-         ]);
-
-         $result['order_no'] = $order_id;
-         $result['total'] = Session::get('cartTotal');
-         $data = [
-            'to'      => user()->email,
-            'subject' => 'Order Confirmation',
-            'view'    => 'purchase',
-            'name'    => user()->fullname,
-            'body'    => $result
-         ];
-
-         (new Mail())->send($data);
+         $this->logPaymentAndMailClient('paypal', $response);
 
          Cart::clear();
          echo json_encode([

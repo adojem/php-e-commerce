@@ -124,10 +124,10 @@
                         </span>
    
                         <span>
-                           <a href="/" class="button secondary">
+                           <a href="/" class="button secondary" style="margin-right:5px">
                               Continue Shopping &nbsp; <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                           </a>
-                           <span v-if="authenticated">
+                           </a><!--
+                           --><span v-if="authenticated">
                               <button @click.prevent="checkout" class="button success">
                                  Payment With Card &nbsp; <i class="fa fa-credit-card" aria-hidden="true"></i>
                               </button>

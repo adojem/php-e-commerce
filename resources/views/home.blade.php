@@ -16,9 +16,9 @@
 
       <section class="display-products" data-token="{{ $token }}" id="root">
 
-         <div>
+         <div class="grid-container">
 
-            <h2 v-show="!loading">Featured Products</h2>
+            <h2>Featured Products</h2>
             
             <div class="grid-x">
                
@@ -50,7 +50,7 @@
 
          <div class="grid-container">
 
-            <h2 v-show="!loading">Product Picks</h2>
+            <h2>Product Picks</h2>
 
             <div class="grid-x">
                

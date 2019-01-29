@@ -34,7 +34,7 @@
 
          </div>
 
-         <div class="grid-x align-middle">
+         <div class="grid-x align-middle align-center">
 
             <div class="cell grid-x align-center small-12 medium-5 large-4">
                <div class="product__img">
@@ -64,7 +64,7 @@
             
          <h2>Similar Products</h2>
             
-            <div class="grid-x">
+            <div class="grid-x align-center">
                
                <div class="cell large-3 medium-6 small-12" v-cloak v-for="similar in similarProducts">
 
