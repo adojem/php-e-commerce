@@ -29,7 +29,7 @@
                      <table class="hover unstriped">
                         <thead class="text-left">
                            <tr>
-                              <th>#</th>
+                              <th width=>#</th>
                               <th>Product Name</th>
                               <th>($) Unit Price</th>
                               <th>Qty</th>
@@ -116,14 +116,14 @@
                         </tr>
                      </table>
    
-                     <s class="grid-x align-justify">
-                        <span>
-                           <button @click="clearCartItems()" id="clear-cart-item" class="button alert">
-                              Clear All &nbsp; <i class="fas fa-eraser" aria-hidden="true"></i>
+                     <div class="grid-x align-justify">
+                        <div>
+                           <button @click.prevent="emptyCart" id="clear-cart-item" class="button alert">
+                              Empty Cart &nbsp; <i class="fas fa-trash" aria-hidden="true"></i>
                            </button>
-                        </span>
+                        </div>
    
-                        <span>
+                        <div>
                            <a href="/" class="button secondary" style="margin-right:5px">
                               Continue Shopping &nbsp; <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                            </a><!--
@@ -142,7 +142,7 @@
                            <span id="properties" class="hide"
                               data-customer-email="{{ user()->email }}"
                               data-stripe-key="{{ App\Classes\Session::get('publishable_key') }}">
-                           </span>
+                           </div>
                         </span>
                      </div>
                   </div>

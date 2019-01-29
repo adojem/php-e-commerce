@@ -37,10 +37,10 @@ $router->map(
 );
 
 $router->map(
-   'GET',
-   '/cart/clear_items',
-   'App\Controllers\CartController@clearItems', 
-   'clear_cart_items'
+   'POST',
+   '/cart/empty',
+   'App\Controllers\CartController@emptyCart', 
+   'empty_cart'
 );
 
 // Payments

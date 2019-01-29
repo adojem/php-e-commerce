@@ -53,10 +53,10 @@ const cart = () => {
             });
             app.paypalCheckout(1000);
          },
-         clearCartItems() {
-            axios.get('/cart/clear_items').then((response) => {
+         emptyCart() {
+            axios.post('/cart/empty').then((response) => {
                displayMessage('.notify', response.data.success);
-               app.displayItems(200);
+               app.displayItems(10);
             });
          },
          checkout() {

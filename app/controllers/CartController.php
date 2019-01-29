@@ -168,10 +168,10 @@ class CartController extends BaseController
       }
    }
 
-   public function clearItems()
+   public function emptyCart()
    {
       Cart::clear();
-      echo json_encode(['success' => 'Cart Items were removed']);
+      echo json_encode(['success' => 'Shopping Cart Emptied!']);
       exit;
    }
 
