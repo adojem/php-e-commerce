@@ -20,4 +20,5 @@ class User extends Model {
       'role'
    ];
    protected $dates = ['deleted_at'];
+   protected $hidden = ['password', 'deleted_at'];
 }

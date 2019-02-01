@@ -2,7 +2,6 @@
 
 namespace App\Controllers\Admin;
 
-use Illuminate\Database\Capsule\Manager as Capsule;
 use App\Classes\Redirect;
 use App\Classes\Role;
 use App\Controllers\BaseController;
@@ -10,6 +9,7 @@ use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Product;
 use App\Models\User;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class DashboardController extends BaseController
 {
@@ -37,31 +37,6 @@ class DashboardController extends BaseController
             'users'
          )
       );
-   }
-
-   public function showOrders()
-   {
-      $orders = Capsule::table('orders')->select(
-         'order_no', 
-         Capsule::raw('TRUNCATE(SUM(total), 2) as `total_price`'),
-         Capsule::raw("DATE_FORMAT(created_at, '%m/%d/%Y') date")
-      )->groupBy('order_no')->get()->sortByDesc('date');
-
-      view('admin/orders/orders', \compact('orders'));
-   }
-
-   public function showOrderDetails($order_no)
-   {
-      $order = Capsule::table('orders')->where('order_no', $order_no)->join('products', 'product_id', '=', 'products.id')->groupBy('product_id')->select(
-         'name',
-         'price',
-         'orders.quantity',
-         // Capsule::raw('TRUNCATE(SUM(price), 2) as `total_price`'),
-         Capsule::raw('total as `total_price`'),
-         Capsule::raw("DATE_FORMAT(orders.created_at, '%m/%d/%Y') date")
-      )->get();
-
-      view('admin/orders/order', \compact('order', 'order_no'));
    }
 
    public function showPayments()
