@@ -25,7 +25,7 @@
          <a href="/admin/product/categories"><i class="fa fa-object-group fa-fw" aria-hidden="true"></i>&nbsp; Categories</a>
       </li>
       <li>
-         <a href="/admin/orders"><i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>&nbsp; View Orders</a>
+         <a href="/admin/transactions/orders"><i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i>&nbsp; View Orders</a>
       </li>
       <li>
          <a href="/admin/payments"><i class="fa fa-money-bill-alt fa-fw" aria-hidden="true"></i>&nbsp; Payments</a>

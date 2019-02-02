@@ -38,7 +38,7 @@
 
          <div class="small-12 medium-12 cell">
             @if (count($categories))
-               <table class="over unstriped" data-form="deleteForm">
+               <table class="hover unstriped" data-form="deleteForm">
                   <thead>
                      <tr>
                         <th>Name</th>
