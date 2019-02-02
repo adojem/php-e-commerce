@@ -12,14 +12,6 @@ $router->map(
    'App\Controllers\Admin\DashboardController@getChartData', 'admin_dashboard_charts'
 );
 
-// payments
-$router->map(
-   'GET',
-   '/admin/payments',
-   'App\Controllers\Admin\DashboardController@showPayments',
-   'admin_dashboard_payments'
-);
-
 $router->map(
    'GET',
    '/admin/payments/[i:id]',
@@ -132,4 +124,11 @@ $router->map(
    '/admin/transactions/orders',
    'App\Controllers\Admin\OrderController@show',
    'dashboard_transaction_orders'
+);
+
+$router->map(
+   'GET',
+   '/admin/transactions/payments',
+   'App\Controllers\Admin\PaymentController@show',
+   'dashboard_transaction_payment'
 );

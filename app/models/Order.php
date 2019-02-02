@@ -43,6 +43,7 @@ class Order extends Model {
             $response[$detail->order_no]['when'] = $when->toFormattedDateString();
          }
       }
+      
       return $response;
    }
 }

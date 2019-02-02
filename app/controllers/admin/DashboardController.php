@@ -39,29 +39,6 @@ class DashboardController extends BaseController
       );
    }
 
-   public function showPayments()
-   {
-      $payments = Capsule::table('payments')->join('users', 'user_id', '=', 'users.id')->select(
-         'user_id',
-         'fullname',
-         Capsule::raw('sum(amount) as `amount`')
-      )->groupBy('user_id')->get();
-
-      view('admin/payments/payments', compact('payments'));
-   }
-
-   public function showPaymentDetails($user_id)
-   {
-      $payments = Capsule::table('payments')->where('user_id', $user_id)->join('users', 'user_id', '=', 'users.id')->select(
-         'fullname',
-         'order_no',
-         Capsule::raw('sum(amount) as `payment`'),
-         Capsule::raw("DATE_FORMAT(payments.created_at, '%m/%d/%Y') date")
-      )->groupBy('order_no')->get()->sortByDesc('date');
-
-      view('admin/payments/payment', compact('payments'));
-   }
-
    public function getChartData()
    {
       $revenue = Capsule::table('payments')->select(
