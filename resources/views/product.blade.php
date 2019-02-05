@@ -23,7 +23,7 @@
                         </a>
                      </li>
                      <li>
-                        <a :href="'/product/subcategory/' + subCategory.slug">
+                        <a :href="'/product/subcategory/' + category.slug + '/' + subCategory.slug">
                            @{{ subCategory.name }}
                         </a>
                      </li>

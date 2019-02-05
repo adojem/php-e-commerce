@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Products')
-@section('data-page-id', 'products')
+@section('title', 'Homepage')
+@section('data-page-id', 'categories')
 
 @section('content')
 
@@ -9,8 +9,6 @@
       <section class="display-products" data-token="{{ $token }}" id="root">
 
          <div class="grid-container">
-
-            <h2>Products</h2>
 
             <div class="grid-x">
                
